@@ -1,0 +1,41 @@
+//reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/**
+fonts
+*/
+
+* {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bowlby One', sans-serif;
+    letter-spacing: 1.2px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}
