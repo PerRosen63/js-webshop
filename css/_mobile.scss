@@ -1,3 +1,9 @@
+//color variables
+$black: #000000;
+$white: #ffffff;
+$red: #ff0000;
+
+
 //reset
 * {
     margin: 0;
@@ -30,12 +36,49 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: $black;
+    color: $white;
     padding: 20px;
 }
 
 header {
     display: flex;
     align-items: center;
-}
+    justify-content: space-between;
+    > div {
+        padding: 20px;
+    }
+    .cartIconContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-width: 160px;
+        .cartIcon {
+            font-size: 2rem;
+        }
+        #cartIconCircle {
+            width: 30px;
+            height: 30px;
+            background-color: $red;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 38px;
+            padding-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #cartIconSum {
+            margin-left: 30px;
+        }
+        
+    }
+    .hamburgerContainer {
+        align-self: flex-start;
+        .hamburgerIcon {
+            font-size: 2rem;
+        }
+    }
+    }
+    

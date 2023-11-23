@@ -4,3 +4,8 @@
 ## Wireframe desktop
 
 ![](wireframe\webbshop-wireframe-2023-11-20-20_35_11.jpg)
+
+## Wireframe mobile
+
+![](wireframe\webbshop-wireframe-2023-11-23_mobile.jpg)
+

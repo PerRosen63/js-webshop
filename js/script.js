@@ -24,6 +24,8 @@
  * 
  * - Minst 15 varor = gratis frakt. 25kr + 10% av tot.bel.
  * 
+ * - Uppdatera varukorg?
+ * 
  * 4.FORMULÄR
  * 
  * - html
