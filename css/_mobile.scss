@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1.2px;
     font-weight: 400;
     text-transform: uppercase;
-    padding: 20px;
+    //padding: 20px;
 }
 
 body {
@@ -42,13 +42,29 @@ body {
 }
 
 header {
-    display: flex;
+    display: grid;
+    grid-template-areas: 'hamburgerContainer cartIconContainer' 'logo logo' 'pageTitle pageTitle';
+    //flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
     > div {
         padding: 20px;
     }
+    .logo {
+        grid-area: logo;
+        justify-self: center;
+        img {
+            max-width: 100%;
+        }
+    }
+    .pageTitle {
+        grid-area: pageTitle;
+        justify-self: center;
+        text-align: center;
+    }
     .cartIconContainer {
+        grid-area: cartIconContainer;
+        justify-self: end;
         position: relative;
         display: flex;
         align-items: center;
@@ -75,10 +91,17 @@ header {
         
     }
     .hamburgerContainer {
-        align-self: flex-start;
+        grid-area: hamburgerContainer;
+        justify-self: start;
         .hamburgerIcon {
             font-size: 2rem;
         }
     }
     }
-    
+.labelRow {
+    border-bottom: 2px solid $white;
+}    
+
+.cartFooter > div {
+    border-bottom: 1px solid $white;
+}

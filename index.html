@@ -31,6 +31,127 @@
         </div>
 
     </header>
+    <main>
+        <section class="sortSection">
+            <div class="bannerColumn">
+                <h6>10% på de varor du handlar mer än 10 exemplar av!</h6>
+            </div>
+            <div class="sortColumn">
+                <label for="sort"></label>
+                <select name="sort" id="sort">
+                    <option value="">Välj</option>
+                    <option value="produkt">Produkt</option>
+                    <option value="kategori">Kategori</option>
+                    <option value="pris">Pris</option>
+                    <option value="betyg">Betyg</option>
+                </select>
+            </div>
+        </section>
+        <section class="productSection" id="productSection"></section>
+        <section class="cartSection">
+            <h2>Varukorg</h2>
+            <div class="labelRow">
+                <h6>Produkt</h6>
+                <h6>Antal</h6>
+                <h6>Pris</h6>
+                <h6>Delsumma</h6>
+            </div>
+            <div class="productGrid" id="productGrid"></div>
+            <div class="cartFooter">
+                <div class="cartFooterRow1">
+                    <div class="cartFooterAmount">Totalt antal: <span id="cartFooterAmount"></span></div>
+                    <div class="cartFooterSum">Varusumma: <span id="cartFooterSum"></span></div>
+                </div>
+                <div class="cartFooterRow2">
+                    <div class="cartFooterDiscount">Måndagsmorgonrabatt 03.00 - 10.00: 10 % på hela beställningen: <span id="cartFooterDiscount"></span></div>
+                </div>
+                <div class="cartFooterRow3">
+                    <div class="cartFooterShipPercent">Minst 15 varor = gratis frakt! Annars 10% av tot.bel. + 25kr: <span id="cartFooterShipPercent"></span></div>
+                    <div class="cartFooterShipFee"><span id="cartFooterShipFee"></span></div>
+                </div>
+                <div class="cartFooterRow4">
+                    <div class="cartFooterSumTot">Summa: <span id="cartFooterSumTot"></span></div>
+                </div>
+            </div>
+        </section>
+        <section class="formSection">
+            <form action="">
+                <label>Förnamn
+                    <input type="text" name="fname" id="fname" placeholder="Förnamn" required>
+                </label>
+                <label>Efternamn
+                    <input type="text" name="lname" id="lname" placeholder="Efternamn" required>
+                </label>
+                <label>Adress
+                    <input type="text" name="address" id="address" placeholder="Adress" required>
+                </label>
+                <label>Postnummer
+                    <input type="number" name="postnumber" id="postnumber" placeholder="Postnummer" required>
+                </label>
+                <label>Postort
+                    <input type="text" name="postort" id="postort" placeholder="Postort" required>
+                </label>
+                <label>Ev. portkod
+                    <input type="text" name="portkod" id="portkod" placeholder="Ev. portkod">
+                </label>
+                <label>Telefon
+                    <input type="tel" name="tel" id="tel" placeholder="Telefon" required>
+                </label>
+                <label>E-post
+                    <input type="email" name="email" id="email" placeholder="E-post" required>
+                </label>
+                <div class="payOption">
+                    <p>Välj betalsätt:</p>
+                    <label>Faktura
+                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" required>
+                    </label>
+                    <label>Kort
+                        <input type="radio" name="payoption" id="card" value="card" placeholder="Kort">
+                    </label>
+                </div>
+                <div class="persNumber" id="persNumber">
+                    <label>Personnummer
+                        <input type="number" name="persnumber" id="persnumber" placeholder="Personnummer" required>
+                    </label>
+                </div>
+                <div class="cardNumber" id="cardNumber">
+                    <label>Kortnummer
+                        <input type="number" name="cardnumber" id="cardnumber" placeholder="Kortnummer" required>
+                    </label>
+                    <label>Månad / År
+                        <input type="month" name="monthyear" id="monthyear" placeholder="Månad / År" required>
+                    </label>
+                    <label>CVC
+                        <input type="number" name="cvc" id="cvc" placeholder="CVC" required>
+                    </label>
+                </div>
+                <div class="checkbox1">
+                    <input type="checkbox" name="checkone" id="checkone" required>
+                    <label for="checkone">Du godkänner <a href="#">vår behandling</a> av dina personuppgifter.</label>               
+                </div>
+                <div class="checkbox2">
+                    <input type="checkbox" name="checktwo" id="checktwo" required>
+                    <label for="checktwo">Ja tack, sänd mig ert nyhetsbrev!</label>               
+                </div>
+                <label>Jag har en rabattkod
+                    <input type="number" name="discountcode" id="discountcode" placeholder="Rabattkod" required>
+                </label>
+                <div class="buttons">
+                    <input type="submit" value="Beställ!">
+                    <input type="reset" value="Rensa formulär!">
+                </div>           
+            </form>
+        </section>
+        <section class="confSection" id="confSection">
+            <h3>Bekräftelse</h3>
+            <p>Tack, <span id="foreName"></span> för din beställning!</p>
+            <p>Du har beställt varor för <span id="confSum"></span>:-. Porto tillkommer med <span id="shipTot"></span>:-. Totalt <span id="confSumTot"></span>:- inkl. moms.</p>
+            <p>Vi kommer att leverera dina varor inom 5 dagar.</p>
+        </section>
+    </main>
+    <footer class="footer">
+        <div>© <span id="year"></span>- The Dogmen | All rights reserved | info@thedogmen.se</div>
+    </footer>
 <script src="js/script.js"></script>
 </body>
 </html>
