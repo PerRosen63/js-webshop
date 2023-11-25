@@ -35,11 +35,21 @@ h1, h2, h3, h4, h5, h6 {
     //padding: 20px;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover
+}
+
 body {
     background-color: $black;
     color: $white;
     padding: 20px;
 }
+
+/**
+Header
+*/
 
 header {
     display: grid;
@@ -98,15 +108,21 @@ header {
         }
     }
     }
-.labelRow {
-    border-bottom: 2px solid $white;
-}    
 
-.cartFooter > div {
-    border-bottom: 1px solid $white;
+
+/**
+Product section
+*/
+
+.productContainer {
+    display: grid;
+    gap: 20px;
+    article {
+        text-align: center;
+    }
 }
 
-//Stjärnor
+//Stars
 .productRating {
     .material-symbols-outlined::before {
         position: absolute;
@@ -115,8 +131,7 @@ header {
         height: 24px;              
     }
 }
-//hela
-
+//whole stars
 .productRating-0 .material-symbols-outlined:nth-child(n+1):nth-child(-n+5)::before {
     box-shadow: inset -24px 0 rgba(0,0,0,0.7);
 }
@@ -136,7 +151,8 @@ header {
 .productRating-35 .material-symbols-outlined:nth-child(5)::before, .productRating-40 .material-symbols-outlined:nth-child(5)::before {
         box-shadow: inset -24px 0 rgba(0,0,0,0.7);
     }
-//halva
+
+//half stars
 .productRating-5 .material-symbols-outlined:nth-child(1)::before {
     box-shadow: inset -12px 0 rgba(0,0,0,0.7);
 }
@@ -153,17 +169,15 @@ header {
     box-shadow: inset -12px 0 rgba(0,0,0,0.7);
 }
 
-/* }
-.productRating-25  {
-    .material-symbols-outlined:nth-child(3)::before {
-        box-shadow: inset -12px 0 rgba(0,0,0,0.7);
-    }
-    .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before {
-        box-shadow: inset -24px 0 rgba(0,0,0,0.7);
-    }
-}
-.productRating-05  {
-    .material-symbols-outlined:nth-child(5)::before {
-        box-shadow: inset -12px 0 rgba(0,0,0,0.7);
-    } */
 
+/**
+Cart section
+*/
+
+.labelRow {
+    border-bottom: 2px solid $white;
+}    
+
+.cartFooter > div {
+    border-bottom: 1px solid $white;
+}

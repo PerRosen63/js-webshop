@@ -4,6 +4,7 @@ const products = [
         category: 'Konst',
         price: 150,
         rating: 5.0,
+        amount: 0,
         image: {
                 src: 'assets/QaD-300x300-square.jpg',
                 alt: 'The Dogmen-affisch',
@@ -15,17 +16,113 @@ const products = [
         category: 'Kläder',
         price: 250,
         rating: 2.5,
+        amount: 0,
         image: {
                 src: 'assets/Dogmen_tisha-300x300-square.jpg',
+                alt: 'T-shirt Quick&Dirty',
+                title: 'T-shirt Quick&Dirty'
+            }       
+    },
+    {
+        name: 'T-shirt L',
+        category: 'Kläder',
+        price: 250,
+        rating: 3,
+        amount: 0,
+        image: {
+                src: 'assets/Dogmen_tisha-300x300-square.jpg',
+                alt: 'T-shirt Quick&Dirty',
+                title: 'T-shirt Quick&Dirty'
+            }       
+    },
+    {
+        name: 'T-shirt M',
+        category: 'Kläder',
+        price: 250,
+        rating: 3.5,
+        amount: 0,
+        image: {
+                src: 'assets/Dogmen_tisha-300x300-square.jpg',
+                alt: 'T-shirt Quick&Dirty',
+                title: 'T-shirt Quick&Dirty'
+            }       
+    },
+    {
+        name: 'T-shirt SM',
+        category: 'Kläder',
+        price: 250,
+        rating: 4.5,
+        amount: 0,
+        image: {
+                src: 'assets/Dogmen_tisha-300x300-square.jpg',
+                alt: 'T-shirt Quick&Dirty',
+                title: 'T-shirt Quick&Dirty'
+            }       
+    },
+    {
+        name: 'Trendig bag',
+        category: 'Accessoarer',
+        price: 200,
+        rating: 4.5,
+        amount: 0,
+        image: {
+                src: 'assets/dogmen_vaska-300x300-square.jpg',
+                alt: 'Väska Quick&Dirty',
+                title: 'Väska Quick&Dirty'
+            }       
+    },
+    {
+        name: 'Quick&Dirty (10")',
+        category: 'Musik',
+        price: 225,
+        rating: 5,
+        amount: 0,
+        image: {
+                src: 'assets/cropped-QaD_rugged-300x300-square.jpg',
+                alt: 'Skiva Quick&Dirty',
+                title: 'Skiva Quick&Dirty'
+            }       
+    },
+    {
+        name: 'Baltic Depression (7")',
+        category: 'Musik',
+        price: 120,
+        rating: 5,
+        amount: 0,
+        image: {
+                src: 'assets/baltic04-300x300-square.jpg',
+                alt: 'Skiva Baltic Depresssion',
+                title: 'Skiva Baltic Depresssion'
+            }       
+    },
+    {
+        name: 'Good Television (7")',
+        category: 'Musik',
+        price: 120,
+        rating: 5,
+        amount: 0,
+        image: {
+                src: 'assets/goodtv_cover-300x300-square.jpg',
+                alt: 'Skiva Baltic Depresssion',
+                title: 'Skiva Baltic Depresssion'
+            }       
+    },
+    {
+        name: 'Tavla (signerad)',
+        category: 'Konst',
+        price: 1500,
+        rating: 4.0,
+        amount: 0,
+        image: {
+                src: 'assets/dogmen_tavla-300x300-square.jpg',
                 alt: 'The Dogmen-affisch',
                 title: 'Quick&Dirty'
             }       
-    },
+    }
 ];
 
-
 //Amount
-const amount = 0;
+//const amount = 0;
 
 
 const prodContainer = document.querySelector('#productContainer');
@@ -33,11 +130,12 @@ const prodContainer = document.querySelector('#productContainer');
 
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
+    const amount = product.amount;
     const sum = amount * product.price;
     //Rating
     const productRating = `${product.rating}`;
     const productRatingSuffix = productRating * 10;
-    console.log(productRatingSuffix);
+    console.log(sum);
 
 
     prodContainer.innerHTML += `

@@ -1,3 +1,7 @@
 /* header {
     flex-direction: row;
 } */
+
+.productContainer {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
