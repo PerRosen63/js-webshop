@@ -1,60 +1,65 @@
-//PSUEDOKOD
-/**
- * 1. Skriv statisk HTML samt grundläggande CSS
- * 
- * 2. PRODUKTSEKTION
- * 
- * - gör array med objekt för varje produkt
- * 
- * - printa ut produkter inkl. plus- och minusknappar för varje produkt
- * 
- * - eventslyssnare på plus- och minusknappar
- * 
- * - "Osynligt" helgpåslag 15%
- * 
- * - Mängdrabatt/artikel, minst 10st 10%
- * 
- * 3. VARUKORG
- * 
- * - printa ut alla produkter med amount > 0
- * 
- * - summa
- * 
- * - Måndagsrabatt 03:00-10.00: 10 % på hela beställningen (synligt)
- * 
- * - Minst 15 varor = gratis frakt. 25kr + 10% av tot.bel.
- * 
- * - Uppdatera varukorg?
- * 
- * 4.FORMULÄR
- * 
- * - html
- * 
- * - conditional radiobuttons Faktura eller Kort
- * 
- * - validering
- * 
- * - event på Beställ-knapp som öppnar Bekräftelse-ruta
- * 
- * - Faktura högst 800kr
- * 
- * - Utgråad beställ-knapp
- * 
- * - Timeout efter 15 min med meddelande att beställaren är för långsam samt rensning av formulär. Start vid laddning av sida, klick i produktdelen eller klick i formulär. 
- * 
- * 5. SORTERA
- * 
- * - selectbox? radiobuttons?
- * 
- *
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
+const products = [
+    {
+        name: 'Affisch',
+        category: 'Konst',
+        price: 150,
+        rating: 5.0,
+        image: {
+                src: 'assets/QaD-300x300-square.jpg',
+                alt: 'The Dogmen-affisch',
+                title: 'Quick&Dirty'
+            }       
+    },
+    {
+        name: 'T-shirt XL',
+        category: 'Kläder',
+        price: 250,
+        rating: 2.5,
+        image: {
+                src: 'assets/Dogmen_tisha-300x300-square.jpg',
+                alt: 'The Dogmen-affisch',
+                title: 'Quick&Dirty'
+            }       
+    },
+];
+
+
+//Amount
+const amount = 0;
+
+
+const prodContainer = document.querySelector('#productContainer');
+//console.log(prodContainer);
+
+for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    const sum = amount * product.price;
+    //Rating
+    const productRating = `${product.rating}`;
+    const productRatingSuffix = productRating * 10;
+    console.log(productRatingSuffix);
+
+
+    prodContainer.innerHTML += `
+        <article>
+        <img class="productImage" src="${product.image.src}" alt="${product.image.alt}" width="300" height="300" loading="lazy" >
+        <h3 class="productName">${product.name}</h3>
+        <p class="productCategory"><span>Kategori: </span>${product.category}</p>
+        <h4 class=productPrice><span>Pris: </span>${product.price}:-</h4>
+        <div>
+            <span class="material-symbols-outlined">indeterminate_check_box</span>            
+            <span class="material-symbols-outlined">add_box</span>
+        </div>
+        <p class="amount">${amount + ' st' + ' ' + sum}:-</p>
+        <div class="productRating productRating-${productRatingSuffix}" aria-label="Rating ${product.rating}">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+        </div>
+
+        </article>
+    `;
+
+}

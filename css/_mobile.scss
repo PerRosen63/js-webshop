@@ -105,3 +105,65 @@ header {
 .cartFooter > div {
     border-bottom: 1px solid $white;
 }
+
+//Stjärnor
+.productRating {
+    .material-symbols-outlined::before {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;              
+    }
+}
+//hela
+
+.productRating-0 .material-symbols-outlined:nth-child(n+1):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+}
+
+.productRating-5 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before, .productRating-10 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+}
+
+.productRating-15 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before, .productRating-20 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+}
+
+.productRating-25 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before, .productRating-30 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+}
+
+.productRating-35 .material-symbols-outlined:nth-child(5)::before, .productRating-40 .material-symbols-outlined:nth-child(5)::before {
+        box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+    }
+//halva
+.productRating-5 .material-symbols-outlined:nth-child(1)::before {
+    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+}
+.productRating-15 .material-symbols-outlined:nth-child(2)::before {
+    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+}
+.productRating-25 .material-symbols-outlined:nth-child(3)::before {
+    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+}
+.productRating-35 .material-symbols-outlined:nth-child(4)::before {
+    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+}
+.productRating-45 .material-symbols-outlined:nth-child(5)::before {
+    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+}
+
+/* }
+.productRating-25  {
+    .material-symbols-outlined:nth-child(3)::before {
+        box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    }
+    .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before {
+        box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+    }
+}
+.productRating-05  {
+    .material-symbols-outlined:nth-child(5)::before {
+        box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    } */
+
