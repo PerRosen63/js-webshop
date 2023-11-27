@@ -146,9 +146,8 @@ function increaseAmount(e) {
 function resetAmount(e) {
     const index = e.currentTarget.dataset.id
     products[index].amount = 0;
-    //printProducts();
+    printProducts();
     printCartProducts();
-    console.log(index);
 }; 
     
 
@@ -161,11 +160,11 @@ function printProducts() {
 
     const amount = product.amount;
 
-    if (amount > 3) {
-        console.log('hej');
+    let sum = amount * product.price;
+  
+    if (amount > 9) {
+        sum = sum * 0.9; //10% discount
     }
-
-    const sum = amount * product.price;
 
     //Rating
     const productRating = product.rating;
@@ -173,6 +172,7 @@ function printProducts() {
     
     prodContainer.innerHTML += `
         <article>
+        
         <img class="productImage" src="${product.image.src}" alt="${product.image.alt}" width="300" height="300" loading="lazy" >
         <h3 class="productName">${product.name}</h3>
         <p class="productCategory"><span>Kategori: </span>${product.category}</p>
@@ -218,7 +218,12 @@ function printCartProducts() {
     products.forEach((product, j) => {
         if (product.amount > 0) {
             const amount = product.amount;
-            const sum = amount * product.price;
+            let sum = amount * product.price;
+            
+            if (amount > 9) {
+                sum = sum * 0.9; //10% discount    
+            }
+
             footerSum += sum;
             footerAmount += amount;
             cartContainer.innerHTML += `
@@ -230,11 +235,18 @@ function printCartProducts() {
                     <button data-id="${j}" class="cartPlus material-symbols-outlined">add_box</button>
                 </div>
                 <p class=productPrice><span>Pris: </span>${product.price}:-</p>
-                <p class="sum"><span>Delsumma: </span> ${sum}:-</p>
+                <p class="sum"><i class="discount"></i><span>Delsumma: </span> ${sum}:-</p>
                 <button data-id="${j}" class="cartDelete material-symbols-outlined">cancel</button>
+                
             </article>
             ` 
+            const discount = document.querySelector('.discount');
+            if (amount > 9) {
+                discount.innerHTML += ' Rabatt 10%! ';   
+            }
+             
         }
+        
     });
     const cartFooterAmount  = document.querySelector('#cartFooterAmount');
     const cartFooterSum = document.querySelector('#cartFooterSum');
