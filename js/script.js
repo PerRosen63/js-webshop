@@ -141,7 +141,6 @@ function increaseAmount(e) {
     const index = e.currentTarget.dataset.id
     products[index].amount += 1;
     printProducts();
-    //printCartProducts();
 };  
 
 function resetAmount(e) {
@@ -161,6 +160,11 @@ function printProducts() {
     const product = products[i];
 
     const amount = product.amount;
+
+    if (amount > 3) {
+        console.log('hej');
+    }
+
     const sum = amount * product.price;
 
     //Rating
@@ -173,7 +177,7 @@ function printProducts() {
         <h3 class="productName">${product.name}</h3>
         <p class="productCategory"><span>Kategori: </span>${product.category}</p>
         <h4 class=productPrice><span>Pris: </span>${product.price}:-</h4>
-        <div>
+        <div class="amountContainer">
             <button data-id="${i}" class="minus material-symbols-outlined">indeterminate_check_box</button>            
             <button data-id="${i}" class="plus material-symbols-outlined">add_box</button>
         </div>
@@ -220,13 +224,13 @@ function printCartProducts() {
             cartContainer.innerHTML += `
             <article class="cartRow">
                 <h4>${product.name}</h4>
-                <div>
+                <div class="cartAmountContainer">
                     <button data-id="${j}" class="cartMinus material-symbols-outlined">indeterminate_check_box</button>            
                     <p class="amount">${amount + ' st'}</p>
                     <button data-id="${j}" class="cartPlus material-symbols-outlined">add_box</button>
                 </div>
-                <h4 class=productPrice><span>Pris: </span>${product.price}:-</h4>
-                <p class="sum">${sum}:-</p>
+                <p class=productPrice><span>Pris: </span>${product.price}:-</p>
+                <p class="sum"><span>Delsumma: </span> ${sum}:-</p>
                 <button data-id="${j}" class="cartDelete material-symbols-outlined">cancel</button>
             </article>
             ` 

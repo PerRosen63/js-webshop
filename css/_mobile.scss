@@ -1,10 +1,15 @@
-//color variables
+/**
+ color variables 
+ */
+
 $black: #000000;
 $white: #ffffff;
 $red: #ff0000;
 
 
-//reset
+/**
+ reset 
+ */
 * {
     margin: 0;
     padding: 0;
@@ -35,11 +40,37 @@ h1, h2, h3, h4, h5, h6 {
     //padding: 20px;
 }
 
+/**
+Icons
+*/
+
+.material-symbols-outlined {
+    border-color: transparent; 
+    /* border: 1px solid transparent; */
+    background-color: $black;
+    color: $white;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+
+/** 
+Images 
+*/
+
+
 img {
     max-width: 100%;
     height: auto;
-    object-fit: cover
+    object-fit: cover;
+    margin-bottom: 5px;
 }
+
+//Body
 
 body {
     background-color: $black;
@@ -118,12 +149,27 @@ Product section
     display: grid;
     gap: 20px;
     article {
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3, p, h4, .productRating {
         text-align: center;
+        margin-top: 5px;
+    }
+    .amountContainer {
+        display: flex;
+        align-items: flex-start;
+        button:hover {
+            border-top: 1px solid transparent;
+        }
+    }
     }
 }
 
+
 //Stars
 .productRating {
+    text-align: center;
     .material-symbols-outlined::before {
         position: absolute;
         content: "";
@@ -174,10 +220,45 @@ Product section
 Cart section
 */
 
+.cartSection {
+    margin: 40px 0;
+     h2 {
+    text-align: center;
+     }
+}
+
 .labelRow {
     border-bottom: 2px solid $white;
-}    
+    h6 {
+        display: none;
+    }
+}
+
+.cartRow {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid $white;
+    .cartAmountContainer {
+        display: flex;
+        justify-content: flex-start;
+            p {
+            display: inline-block;
+            padding: 10px;
+            }
+    }
+    .productPrice, .sum {
+        span {
+            font-weight: 700;
+        }
+    }
+    button:hover {
+        border-top: none;
+    }
+}
 
 .cartFooter > div {
     border-bottom: 1px solid $white;
 }
+
