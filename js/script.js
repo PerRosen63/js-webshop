@@ -127,6 +127,14 @@ const products = [
 const prodContainer = document.querySelector('#productContainer');
 const cartContainer = document.querySelector('#cartContainer');
 
+/*Timeout 15min*/
+let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
+
+function customerMsg() {
+    alert('Tiden har gått ut! Du måste börja om.');
+    location.reload();
+}
+
 function decreaseAmount(e) {
     const index = e.currentTarget.dataset.id
     if (products[index].amount > 0) {
@@ -151,7 +159,7 @@ function resetAmount(e) {
 }; 
     
 /**
- * Produkter
+ * Produktutskrift
  */
 
 function printProducts() {
@@ -163,16 +171,16 @@ function printProducts() {
     const amount = product.amount;
     let price = product.price;
     
-    
+    /*refaktorera kod se Munkshop3 - Specialregler YT 15min !!!*/
 
     /*Osynligt helgpåslag 15% mellan fredag 15.00 och 02.59 måndagar*/
     const today = new Date();
     const hours = today.getHours();
     const day = today.getDay();
 
-    if (hours >= 11 && hours < 16 && day == 2) {
-        price = price * 11.5/10; 
-    }  
+    if ((day == 0 && hours >= 15) || (day == 1) || (day == 2) || (day == 3 && hours <= 3))  {
+            price = Math.round(price * 11.5/10); 
+        } 
 
     //let sum = amount * product.price;
     let sum = amount * price;
@@ -196,7 +204,7 @@ function printProducts() {
             <button data-id="${i}" class="minus material-symbols-outlined">indeterminate_check_box</button>            
             <button data-id="${i}" class="plus material-symbols-outlined">add_box</button>
         </div>
-        <p class="amount">${amount + ' st' + ' ' + sum}:-</p>
+        <p class="amount">${amount + ' st' + ' ' + Math.round(sum)}:-</p>
         ${/*Add class suffix for styling of stars*/''}
         <div class="productRating productRating-${productRatingSuffix}" aria-label="Rating ${product.rating}">
             <span class="material-symbols-outlined">star</span>
@@ -245,9 +253,9 @@ function printCartProducts() {
             const hours = today.getHours();
             const day = today.getDay();
 
-        if (hours >= 11 && hours < 16 && day == 2) {
-            price = price * 11.5/10; 
-        } 
+            if ((day == 0 && hours >= 15) || (day == 1) || (day == 2) || (day == 3 && hours <= 3))  {
+                price = Math.round(price * 11.5/10); 
+            } 
 
             /*Mängdrabatt 10% vid 10 eller fler/vara*/
             let sum = amount * price;
@@ -266,50 +274,48 @@ function printCartProducts() {
                     <button data-id="${j}" class="cartPlus material-symbols-outlined">add_box</button>
                 </div>
                 <p class=productPrice><span>Pris: </span>${price}:-</p>
-                <p class="sum"><i class="discount"></i><span>Delsumma: </span> ${sum}:-</p>
+                <p class="sum"><i class="discount">${amount > 9 ? ' Rabatt 10%! ' : ''}</i><span>Delsumma: </span> ${Math.round(sum)}:-</p>
                 <button data-id="${j}" class="cartDelete material-symbols-outlined">cancel</button>
                 
             </article>
-            ` 
-            /*Rabatt-text*/
-            const discount = document.querySelector('.discount');
-            if (amount > 9) {
-                discount.innerHTML += ' Rabatt 10%! ';   
-            }
-             
+            `             
         }
         
     });
     const cartFooterAmount  = document.querySelector('#cartFooterAmount');
+    const cartIconCircle = document.querySelector('#cartIconCircle');
     const cartFooterSum = document.querySelector('#cartFooterSum');
+    const cartIconSum = document.querySelector('#cartIconSum');
     const cartFooterDiscount = document.querySelector('#cartFooterDiscount')
     const cartFooterShipFee = document.querySelector('#cartFooterShipFee');
     const cartFooterSumTot = document.querySelector('#cartFooterSumTot');
 
     cartFooterAmount.innerHTML = footerAmount;
-    cartFooterSum.innerHTML = footerSum;
+    cartIconCircle.innerHTML = footerAmount;
+    cartFooterSum.innerHTML = Math.round(footerSum);
+    cartIconSum.innerHTML = Math.round(footerSum);
 
 /*Rabatt 10% mellan 3.00 och 10.00 måndagar*/
     const today = new Date();
     const hours = today.getHours();
     const day = today.getDay();
 
-    if (hours >= 11 && hours < 16 && day == 2) {
-        cartFooterDiscount.innerHTML = footerSum * 0.1;
+    if (hours >= 11 && hours < 18 && day == 2) {
+        cartFooterDiscount.innerHTML = Math.round(footerSum * 0.1);
         footerSum = footerSum * 0.9;    
     }
 
-/*Mängdrabatt*/
+/*Gratis frakt*/
     if (footerAmount > 0 && footerAmount < 15) {
         console.log(footerSum);
-        cartFooterShipFee.innerHTML = footerSum * 1/10 + 25;
+        cartFooterShipFee.innerHTML = Math.round(footerSum * 1/10 + 25);
         footerSum = footerSum * 11/10 + 25;
     } else {
         cartFooterShipFee.innerHTML = 0;
     }
 
 /*Totalsumma*/
-    cartFooterSumTot.innerHTML = footerSum;
+    cartFooterSumTot.innerHTML = Math.round(footerSum);
 
 
     const cartMinusButtons = document.querySelectorAll('.cartMinus');
