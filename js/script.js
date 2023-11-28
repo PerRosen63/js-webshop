@@ -150,7 +150,9 @@ function resetAmount(e) {
     printCartProducts();
 }; 
     
-
+/**
+ * Produkter
+ */
 
 function printProducts() {
     prodContainer.innerHTML = ''; //töm dokument
@@ -159,9 +161,22 @@ function printProducts() {
     const product = products[i];
 
     const amount = product.amount;
+    let price = product.price;
+    
+    
 
-    let sum = amount * product.price;
-  
+    /*Osynligt helgpåslag 15% mellan fredag 15.00 och 02.59 måndagar*/
+    const today = new Date();
+    const hours = today.getHours();
+    const day = today.getDay();
+
+    if (hours >= 11 && hours < 16 && day == 2) {
+        price = price * 11.5/10; 
+    }  
+
+    //let sum = amount * product.price;
+    let sum = amount * price;
+    /*Mängdrabatt 10% vid 10 eller fler/vara*/
     if (amount > 9) {
         sum = sum * 0.9; //10% discount
     }
@@ -176,7 +191,7 @@ function printProducts() {
         <img class="productImage" src="${product.image.src}" alt="${product.image.alt}" width="300" height="300" loading="lazy" >
         <h3 class="productName">${product.name}</h3>
         <p class="productCategory"><span>Kategori: </span>${product.category}</p>
-        <h4 class=productPrice><span>Pris: </span>${product.price}:-</h4>
+        <h4 class=productPrice><span>Pris: </span>${price}:-</h4>
         <div class="amountContainer">
             <button data-id="${i}" class="minus material-symbols-outlined">indeterminate_check_box</button>            
             <button data-id="${i}" class="plus material-symbols-outlined">add_box</button>
@@ -209,6 +224,10 @@ function printProducts() {
 
 };
 
+/**
+ * Varukorg
+ */
+
 function printCartProducts() {
     cartContainer.innerHTML = '';
     
@@ -218,8 +237,20 @@ function printCartProducts() {
     products.forEach((product, j) => {
         if (product.amount > 0) {
             const amount = product.amount;
-            let sum = amount * product.price;
-            
+
+            let price = product.price;
+
+            /*Osynligt helgpåslag 15% mellan fredag 15.00 och 02.59 måndagar*/
+            const today = new Date();
+            const hours = today.getHours();
+            const day = today.getDay();
+
+        if (hours >= 11 && hours < 16 && day == 2) {
+            price = price * 11.5/10; 
+        } 
+
+            /*Mängdrabatt 10% vid 10 eller fler/vara*/
+            let sum = amount * price;
             if (amount > 9) {
                 sum = sum * 0.9; //10% discount    
             }
@@ -234,12 +265,13 @@ function printCartProducts() {
                     <p class="amount">${amount + ' st'}</p>
                     <button data-id="${j}" class="cartPlus material-symbols-outlined">add_box</button>
                 </div>
-                <p class=productPrice><span>Pris: </span>${product.price}:-</p>
+                <p class=productPrice><span>Pris: </span>${price}:-</p>
                 <p class="sum"><i class="discount"></i><span>Delsumma: </span> ${sum}:-</p>
                 <button data-id="${j}" class="cartDelete material-symbols-outlined">cancel</button>
                 
             </article>
             ` 
+            /*Rabatt-text*/
             const discount = document.querySelector('.discount');
             if (amount > 9) {
                 discount.innerHTML += ' Rabatt 10%! ';   
@@ -250,9 +282,34 @@ function printCartProducts() {
     });
     const cartFooterAmount  = document.querySelector('#cartFooterAmount');
     const cartFooterSum = document.querySelector('#cartFooterSum');
+    const cartFooterDiscount = document.querySelector('#cartFooterDiscount')
+    const cartFooterShipFee = document.querySelector('#cartFooterShipFee');
+    const cartFooterSumTot = document.querySelector('#cartFooterSumTot');
 
     cartFooterAmount.innerHTML = footerAmount;
     cartFooterSum.innerHTML = footerSum;
+
+/*Rabatt 10% mellan 3.00 och 10.00 måndagar*/
+    const today = new Date();
+    const hours = today.getHours();
+    const day = today.getDay();
+
+    if (hours >= 11 && hours < 16 && day == 2) {
+        cartFooterDiscount.innerHTML = footerSum * 0.1;
+        footerSum = footerSum * 0.9;    
+    }
+
+/*Mängdrabatt*/
+    if (footerAmount > 0 && footerAmount < 15) {
+        console.log(footerSum);
+        cartFooterShipFee.innerHTML = footerSum * 1/10 + 25;
+        footerSum = footerSum * 11/10 + 25;
+    } else {
+        cartFooterShipFee.innerHTML = 0;
+    }
+
+/*Totalsumma*/
+    cartFooterSumTot.innerHTML = footerSum;
 
 
     const cartMinusButtons = document.querySelectorAll('.cartMinus');
@@ -274,3 +331,6 @@ function printCartProducts() {
 }
 
 printProducts();
+
+
+
