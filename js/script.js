@@ -135,6 +135,52 @@ function customerMsg() {
     location.reload();
 }
 
+/**
+ * Sort
+ */
+const selectProduct = document.querySelector('#sort');
+
+selectProduct.addEventListener('change', sortProduct);
+
+function sortProduct() {
+    if (selectProduct.value === 'produkt') {
+        const sorted = products.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+    if (selectProduct.value === 'kategori') {
+        const sorted = products.sort((a, b) => {
+            if (a.category < b.category) {
+              return -1;
+            }
+            if (a.category > b.category) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+    if (selectProduct.value === 'pris') {
+        products.sort((product1, product2) =>
+        product1.price - product2.price
+        );
+    }
+    if (selectProduct.value === 'betyg') {
+        products.sort((product1, product2) =>
+        product2.rating - product1.rating
+        );     
+    }
+    console.table(products);
+    printProducts();
+}; 
+
+/*Minus-knapp*/
+
 function decreaseAmount(e) {
     const index = e.currentTarget.dataset.id
     if (products[index].amount > 0) {
@@ -144,12 +190,15 @@ function decreaseAmount(e) {
     }
 };
 
+/*Plus-knapp*/
 
 function increaseAmount(e) {
     const index = e.currentTarget.dataset.id
     products[index].amount += 1;
     printProducts();
 };  
+
+/*Ta bort artikel från varukorg*/
 
 function resetAmount(e) {
     const index = e.currentTarget.dataset.id
