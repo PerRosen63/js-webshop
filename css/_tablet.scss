@@ -52,3 +52,36 @@
         justify-self: end;
     }
 }
+
+/** 
+Form
+*/
+form {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+/*     grid-template-rows: repeat(8, auto);
+ */        > label {
+            grid-column: span 3;
+    }
+        label:nth-child(3) {
+            grid-column: span 6;
+        }
+        .payOption {
+            grid-column: span 4;
+        }
+        .persNumber {
+            grid-column: span 3;
+        }
+        .cardNumber {
+            grid-column: span 6;
+        }
+        .checkbox1, .checkbox2 {
+            grid-column: span 6;
+        }
+        .buttons {
+            grid-column: 3/5;
+        }
+        
+}

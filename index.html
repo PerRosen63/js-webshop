@@ -79,33 +79,34 @@
         <section class="formSection">
             <form action="">
                 <label>Förnamn
-                    <input type="text" name="fname" id="fname" placeholder="Förnamn" required>
+                    <input type="text" name="fname" id="fname" placeholder="Förnamn" value="">
+                    <span></span>
                 </label>
                 <label>Efternamn
-                    <input type="text" name="lname" id="lname" placeholder="Efternamn" required>
+                    <input type="text" name="lname" id="lname" placeholder="Efternamn" value="">
                 </label>
                 <label>Adress
-                    <input type="text" name="address" id="address" placeholder="Adress" required>
+                    <input type="text" name="address" id="address" placeholder="Adress" value="">
                 </label>
                 <label>Postnummer
-                    <input type="number" name="postnumber" id="postnumber" placeholder="Postnummer" required>
+                    <input type="number" name="postnumber" id="postnumber" placeholder="Postnummer" value="">
                 </label>
                 <label>Postort
-                    <input type="text" name="postort" id="postort" placeholder="Postort" required>
+                    <input type="text" name="postort" id="postort" placeholder="Postort" value="">
                 </label>
                 <label>Ev. portkod
                     <input type="text" name="portkod" id="portkod" placeholder="Ev. portkod">
                 </label>
                 <label>Telefon
-                    <input type="tel" name="tel" id="tel" placeholder="Telefon" required>
+                    <input type="tel" name="tel" id="tel" placeholder="Telefon" value="">
                 </label>
                 <label>E-post
-                    <input type="email" name="email" id="email" placeholder="E-post" required>
+                    <input type="email" name="email" id="email" placeholder="E-post" value="">
                 </label>
                 <div class="payOption">
                     <p>Välj betalsätt:</p>
                     <label>Faktura
-                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" required>
+                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" checked value="">
                     </label>
                     <label>Kort
                         <input type="radio" name="payoption" id="card" value="card" placeholder="Kort">
@@ -113,34 +114,34 @@
                 </div>
                 <div class="persNumber" id="persNumber">
                     <label>Personnummer
-                        <input type="number" name="persnumber" id="persnumber" placeholder="Personnummer" required>
-                    </label>
+                        <input type="text" name="persnumber" id="persNumberInput" placeholder="Personnummer" value="">
+                    <span></span></label>
                 </div>
-                <div class="cardNumber" id="cardNumber">
+                <div class="cardNumber hidden" id="cardNumber">
                     <label>Kortnummer
-                        <input type="number" name="cardnumber" id="cardnumber" placeholder="Kortnummer" required>
+                        <input type="number" name="cardnumber" id="cardNumberInput" placeholder="Kortnummer" value="">
                     </label>
                     <label>Månad / År
-                        <input type="month" name="monthyear" id="monthyear" placeholder="Månad / År" required>
+                        <input type="month" name="monthyear" id="monthyear" placeholder="Månad / År" value="">
                     </label>
                     <label>CVC
-                        <input type="number" name="cvc" id="cvc" placeholder="CVC" required>
+                        <input type="number" name="cvc" id="cvc" placeholder="CVC" value="">
                     </label>
                 </div>
                 <div class="checkbox1">
-                    <input type="checkbox" name="checkone" id="checkone" required>
+                    <input type="checkbox" name="checkone" id="checkone" value="">
                     <label for="checkone">Du godkänner <a href="#">vår behandling</a> av dina personuppgifter.</label>               
                 </div>
                 <div class="checkbox2">
-                    <input type="checkbox" name="checktwo" id="checktwo" required>
+                    <input type="checkbox" name="checktwo" id="checktwo" value="">
                     <label for="checktwo">Ja tack, sänd mig ert nyhetsbrev!</label>               
                 </div>
                 <label>Jag har en rabattkod
-                    <input type="number" name="discountcode" id="discountcode" placeholder="Rabattkod" required>
+                    <input type="number" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
                 </label>
                 <div class="buttons">
-                    <input type="submit" value="Beställ!">
-                    <input type="reset" value="Rensa formulär!">
+                    <input id="submitBtn" type="submit" value="Beställ!" disabled>
+                    <input id="resetBtn" type="reset" value="Rensa formulär!">
                 </div>           
             </form>
         </section>

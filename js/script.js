@@ -128,12 +128,12 @@ const prodContainer = document.querySelector('#productContainer');
 const cartContainer = document.querySelector('#cartContainer');
 
 /*Timeout 15min*/
-let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
+/* let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
 
 function customerMsg() {
     alert('Tiden har gått ut! Du måste börja om.');
     location.reload();
-}
+} */
 
 /**
  * Sort
@@ -387,5 +387,93 @@ function printCartProducts() {
 
 printProducts();
 
+
+/**
+ * Form
+ */
+
+/* Variables */
+const fName = document.querySelector('#fname');
+const lName = document.querySelector('#lname');
+const address = document.querySelector('#address');
+const postNumber = document.querySelector('#postnumber');
+const city = document.querySelector('#postort');
+const portCode = document.querySelector('#portkod');
+const phoneNumber = document.querySelector('#tel');
+const eMail = document.querySelector('#email');
+
+const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option
+const invoiceOption = document.querySelector('#persNumber'); //Payment option
+const cardOption = document.querySelector('#cardNumber'); //Payment option
+const personalId = document.querySelector('#persNumberInput'); //Payment option
+
+const checkOne = document.querySelector('#checkone');
+const checkTwo = document.querySelector('#checktwo');
+const discountCode = document.querySelector('#discountCode');
+const sendBtn = document.querySelector('#submitBtn');
+
+
+
+
+// Warnings
+const warningfName = document.querySelector('#fname span');
+const warningPersNumber = document.querySelector('#persNumber span');
+
+
+//Toggles between invoice or card payment options
+
+radioInvoiceCard.forEach(radioBtn => {
+    radioBtn.addEventListener('change', switchPayment)
+});
+
+function switchPayment() {
+    invoiceOption.classList.toggle('hidden');
+    cardOption.classList.toggle('hidden');
+}
+
+/* Event listeners */
+
+fName.addEventListener('change', activateButton);
+fName.addEventListener('focusout', activateButton);
+personalId.addEventListener('change', activateButton);
+personalId.addEventListener('focusout', activateButton);
+
+/* Regex check */
+const fNameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/);
+const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/);
+
+function checkfName() {
+    return fNameRegEx.exec(fName.value);
+};
+function checkPersonalId() {
+    return personalIdRegEx.exec(personalId.value);
+};
+
+/**
+ * Activate button if fields are correct
+ */
+
+function activateButton () {
+
+/*Validate persnr*/
+
+    sendBtn.setAttribute('disabled', '');
+
+    if (checkfName() === null) {
+        console.log('hej');
+        warningfName.innerHTML = 'Felaktigt namn!';
+        return;
+    } else {
+        warningfName.innerHTML = '';
+    }
+  /*   if (checkPersonalId() === null) {
+        warningPersNumber.innerHTML = 'Felaktigt personnummer!';
+        return;
+    } else {
+        warningPersNumber.innerHTML = '';
+    } */
+
+    sendBtn.removeAttribute('disabled');
+};
 
 

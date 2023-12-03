@@ -18,6 +18,7 @@ $red: #ff0000;
 
 a {
     text-decoration: none;
+    color: $red;
 }
 
 ul {
@@ -68,6 +69,12 @@ img {
     height: auto;
     object-fit: cover;
     margin-bottom: 5px;
+}
+
+/*Hidden*/
+
+.hidden {
+    display: none!important;
 }
 
 //Body
@@ -261,4 +268,48 @@ Cart section
 .cartFooter > div {
     border-bottom: 1px solid $white;
 }
+
+/** 
+Form
+*/
+
+form > label, .payOption, .persNumber > label, .cardNumber > label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    input {
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+.payOption {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        input {
+            margin-left: 5px;
+        }
+    }
+}
+.checkbox1,.checkbox2 {
+    margin-bottom: 10px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    input {
+        margin: 10px 30px;
+        padding: 10px 0;
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
+}
+
+
 
