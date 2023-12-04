@@ -413,10 +413,9 @@ const discountCode = document.querySelector('#discountCode');
 const sendBtn = document.querySelector('#submitBtn');
 
 
-
-
 // Warnings
-const warningfName = document.querySelector('#fname span');
+const warningfName = document.querySelector('#fNameWarning');
+const warninglName = document.querySelector('#lNameWarning');
 const warningPersNumber = document.querySelector('#persNumber span');
 
 
@@ -435,15 +434,21 @@ function switchPayment() {
 
 fName.addEventListener('change', activateButton);
 fName.addEventListener('focusout', activateButton);
+lName.addEventListener('change', activateButton);
+lName.addEventListener('focusout', activateButton);
 personalId.addEventListener('change', activateButton);
 personalId.addEventListener('focusout', activateButton);
 
 /* Regex check */
 const fNameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/);
+const lNameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/);
 const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/);
 
 function checkfName() {
-    return fNameRegEx.exec(fName.value);
+    return fNameRegEx.exec(fName.value);    
+};
+function checklName() {
+    return lNameRegEx.exec(lName.value);    
 };
 function checkPersonalId() {
     return personalIdRegEx.exec(personalId.value);
@@ -455,23 +460,27 @@ function checkPersonalId() {
 
 function activateButton () {
 
-/*Validate persnr*/
-
     sendBtn.setAttribute('disabled', '');
 
-    if (checkfName() === null) {
+    if (!checkfName() && fName.value !== '') {
         console.log('hej');
-        warningfName.innerHTML = 'Felaktigt namn!';
+        warningfName.innerHTML = 'Felaktigt förnamn!';
         return;
     } else {
-        warningfName.innerHTML = '';
+        warningfName.innerHTML = '';  
     }
-  /*   if (checkPersonalId() === null) {
+    if (!checklName() && lName.value !== '') {
+        warninglName.innerHTML = 'Felaktigt efternamn!';
+        return;
+    } else {
+        warninglName.innerHTML = '';  
+    }
+    if (!checkPersonalId() && personalId.value !== '') {
         warningPersNumber.innerHTML = 'Felaktigt personnummer!';
         return;
     } else {
-        warningPersNumber.innerHTML = '';
-    } */
+        warningPersNumber.innerHTML = '';        
+    } 
 
     sendBtn.removeAttribute('disabled');
 };

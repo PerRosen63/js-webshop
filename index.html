@@ -80,28 +80,35 @@
             <form action="">
                 <label>Förnamn
                     <input type="text" name="fname" id="fname" placeholder="Förnamn" value="">
-                    <span></span>
+                    <span id="fNameWarning"></span>
                 </label>
                 <label>Efternamn
                     <input type="text" name="lname" id="lname" placeholder="Efternamn" value="">
+                    <span id="lNameWarning"></span>
                 </label>
                 <label>Adress
                     <input type="text" name="address" id="address" placeholder="Adress" value="">
+                    <span id="addressWarning"></span>
                 </label>
                 <label>Postnummer
                     <input type="number" name="postnumber" id="postnumber" placeholder="Postnummer" value="">
+                    <span id="postNumberWarning"></span>
                 </label>
                 <label>Postort
                     <input type="text" name="postort" id="postort" placeholder="Postort" value="">
+                    <span id="cityWarning"></span>
                 </label>
                 <label>Ev. portkod
                     <input type="text" name="portkod" id="portkod" placeholder="Ev. portkod">
+                    <span id="portcodeWarning"></span>
                 </label>
                 <label>Telefon
                     <input type="tel" name="tel" id="tel" placeholder="Telefon" value="">
+                    <span id="phoneWarning"></span>
                 </label>
                 <label>E-post
                     <input type="email" name="email" id="email" placeholder="E-post" value="">
+                    <span id="emailWarning"></span>
                 </label>
                 <div class="payOption">
                     <p>Välj betalsätt:</p>
@@ -130,7 +137,8 @@
                 </div>
                 <div class="checkbox1">
                     <input type="checkbox" name="checkone" id="checkone" value="">
-                    <label for="checkone">Du godkänner <a href="#">vår behandling</a> av dina personuppgifter.</label>               
+                    <label for="checkone">Du godkänner <a href="#">vår behandling</a> av dina personuppgifter.</label>
+                    <span id="checkoneWarning"></span>               
                 </div>
                 <div class="checkbox2">
                     <input type="checkbox" name="checktwo" id="checktwo" value="">
@@ -138,6 +146,7 @@
                 </div>
                 <label>Jag har en rabattkod
                     <input type="number" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
+                    <span id="discountWarning"></span>
                 </label>
                 <div class="buttons">
                     <input id="submitBtn" type="submit" value="Beställ!" disabled>
