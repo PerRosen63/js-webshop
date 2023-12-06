@@ -206,6 +206,8 @@ function resetAmount(e) {
     printProducts();
     printCartProducts();
 }; 
+
+
     
 /**
  * Produktutskrift
@@ -227,7 +229,7 @@ function printProducts() {
     const hours = today.getHours();
     const day = today.getDay();
 
-    if ((day == 0 && hours >= 15) || (day == 1) || (day == 2) || (day == 3 && hours <= 3))  {
+    if ((day == 5 && hours >= 15) || (day == 6) || (day == 0) || (day == 1 && hours <= 3))  {
             price = Math.round(price * 11.5/10); 
         } 
 
@@ -302,7 +304,7 @@ function printCartProducts() {
             const hours = today.getHours();
             const day = today.getDay();
 
-            if ((day == 0 && hours >= 15) || (day == 1) || (day == 2) || (day == 3 && hours <= 3))  {
+            if ((day == 5 && hours >= 15) || (day == 6) || (day == 0) || (day == 1 && hours <= 3))  {
                 price = Math.round(price * 11.5/10); 
             } 
 
@@ -337,6 +339,7 @@ function printCartProducts() {
     const cartIconSum = document.querySelector('#cartIconSum');
     const cartFooterDiscount = document.querySelector('#cartFooterDiscount')
     const cartFooterShipFee = document.querySelector('#cartFooterShipFee');
+    const cartFooterDiscountCode = document.querySelector('#cartFooterDiscountCode');
     const cartFooterSumTot = document.querySelector('#cartFooterSumTot');
 
     cartFooterAmount.innerHTML = footerAmount;
@@ -344,29 +347,38 @@ function printCartProducts() {
     cartFooterSum.innerHTML = Math.round(footerSum);
     cartIconSum.innerHTML = Math.round(footerSum);
 
-/*Rabatt 10% mellan 3.00 och 10.00 måndagar*/
+/*Rabatt 10% mellan 4.00 och 10.00 måndagar*/
     const today = new Date();
     const hours = today.getHours();
     const day = today.getDay();
 
-    if (hours >= 11 && hours < 18 && day == 2) {
+    if (hours >= 4 && hours < 10 && day == 1) {
         cartFooterDiscount.innerHTML = Math.round(footerSum * 0.1);
         footerSum = footerSum * 0.9;    
     }
 
 /*Gratis frakt*/
     if (footerAmount > 0 && footerAmount < 15) {
-        console.log(footerSum);
+        //console.log(footerSum);
         cartFooterShipFee.innerHTML = Math.round(footerSum * 1/10 + 25);
         footerSum = footerSum * 11/10 + 25;
     } else {
         cartFooterShipFee.innerHTML = 0;
     }
 
+/*Rabattkod*/
+    const discountCode = document.querySelector('#discountcode'); 
+            
+        if (discountCode.value === 'rabatt') {
+            footerSum = footerSum * 0.95;
+            cartFooterDiscountCode.innerHTML = Math.round(footerSum * 0.05);
+            console.log(footerSum);
+        }
+
 /*Totalsumma*/
     cartFooterSumTot.innerHTML = Math.round(footerSum);
 
-
+    
     const cartMinusButtons = document.querySelectorAll('.cartMinus');
     const cartPlusButtons = document.querySelectorAll('.cartPlus'); 
     const cartDeleteButtons = document.querySelectorAll('.cartDelete')
@@ -385,6 +397,17 @@ function printCartProducts() {
 
 }
 
+/**
+ * Lägg till rabatt
+ */
+    const discountBtn = document.querySelector('#discountBtn');
+
+    discountBtn.addEventListener('click', discountInput);
+
+    function discountInput() {
+        printCartProducts();
+    };
+
 printProducts();
 
 
@@ -402,56 +425,112 @@ const portCode = document.querySelector('#portkod');
 const phoneNumber = document.querySelector('#tel');
 const eMail = document.querySelector('#email');
 
-const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option
-const invoiceOption = document.querySelector('#persNumber'); //Payment option
-const cardOption = document.querySelector('#cardNumber'); //Payment option
-const personalId = document.querySelector('#persNumberInput'); //Payment option
+const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option radio buttons
+const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
+const cardOption = document.querySelector('#cardNumberOption'); //Payment option card div
+
+const personalId = document.querySelector('#persNumberInput'); //personal number
+
+const cardNumber = document.querySelector('#cardNumberInput'); //card number
+const cardMonthYear = document.querySelector('#monthyear'); //month/year
+const cardCvc = document.querySelector('#cvc'); //cvc
+
 
 const checkOne = document.querySelector('#checkone');
 const checkTwo = document.querySelector('#checktwo');
-const discountCode = document.querySelector('#discountCode');
+
 const sendBtn = document.querySelector('#submitBtn');
 
 
 // Warnings
 const warningfName = document.querySelector('#fNameWarning');
 const warninglName = document.querySelector('#lNameWarning');
-const warningPersNumber = document.querySelector('#persNumber span');
+const warningAddress = document.querySelector('#addressWarning');
+const warningPostNumber = document.querySelector('#postNumberWarning');
+const warningCity = document.querySelector('#cityWarning');
+const warningPortCode = document.querySelector('#portcodeWarning');
+const warningPhone = document.querySelector('#phoneWarning');
+const warningEmail = document.querySelector('#emailWarning');
+
+const warningPersNumber = document.querySelector('#persNumberOption span');//Invoice
+const warningCardNumber = document.querySelector('#cardNumberOption span');//Card
+const warningCardMonthYear = document.querySelector('#monthyear span');//Card
+const warningCardCvc = document.querySelector('#cvc+span');//Card
+
+
 
 
 //Toggles between invoice or card payment options
+
+let selectedPaymentOption = 'invoice'; //default
 
 radioInvoiceCard.forEach(radioBtn => {
     radioBtn.addEventListener('change', switchPayment)
 });
 
-function switchPayment() {
+function switchPayment(e) {
     invoiceOption.classList.toggle('hidden');
     cardOption.classList.toggle('hidden');
+    
+    selectedPaymentOption = e.target.value;
 }
 
-/* Event listeners */
+/* Event listeners to activate order button */
 
-fName.addEventListener('change', activateButton);
-fName.addEventListener('focusout', activateButton);
-lName.addEventListener('change', activateButton);
-lName.addEventListener('focusout', activateButton);
-personalId.addEventListener('change', activateButton);
-personalId.addEventListener('focusout', activateButton);
+fName.addEventListener('input', activateButton);
+lName.addEventListener('input', activateButton);
+address.addEventListener('input', activateButton);
+postNumber.addEventListener('input', activateButton);
+city.addEventListener('input', activateButton);
+portCode.addEventListener('input', activateButton);
+phoneNumber.addEventListener('input', activateButton);
+eMail.addEventListener('input', activateButton);
+
+personalId.addEventListener('input', activateButton);//Invoice persnr
+cardNumber.addEventListener('input', activateButton);//Card nr
+//cardMonthYear.addEventListener('input', activateButton);//Card MonthYear
+cardCvc.addEventListener('input', activateButton);//Card cvc
+checkOne.addEventListener('click', activateButton ); //agree box
 
 /* Regex check */
-const fNameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/);
-const lNameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/);
-const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/);
+//const nameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/); //check Förnamn Efternamn Postort
+const nameRegEx = new RegExp(/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/); //check Förnamn Efternamn Postort
+const addressRegEx = new RegExp(/[A-Za-z\u0080-\uFFFF -]{2,}/); //check address
+const postNumberRegEx = new RegExp(/^\d{3} \d{2}$/); //check postnumber
+const phoneNumberRegEx = new RegExp(/^(([+]46)\s*(7)|07)[02369]\s*(\d{4})\s*(\d{3})$/); //check phonenumber
+const eMailRegEx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/); //check emailaddress
+
+const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/); //Check Personnummer
+const cardNumberRegEx = new RegExp(/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/); //Check Mastercard
+
 
 function checkfName() {
-    return fNameRegEx.exec(fName.value);    
+    return nameRegEx.exec(fName.value);    
 };
 function checklName() {
-    return lNameRegEx.exec(lName.value);    
+    return nameRegEx.exec(lName.value);    
 };
+function checkAddress() {
+    return addressRegEx.exec(address.value);    
+};
+function checkPostNumber() {
+    return postNumberRegEx.exec(postNumber.value);    
+};
+function checkCity() {
+    return nameRegEx.exec(city.value);    
+};
+function checkPhoneNumber() {
+    return phoneNumberRegEx.exec(phoneNumber.value);    
+};
+function checkEmail() {
+    return eMailRegEx.exec(eMail.value);    
+};
+
 function checkPersonalId() {
     return personalIdRegEx.exec(personalId.value);
+};
+function checkCardNumber() {
+    return cardNumberRegEx.exec(cardNumber.value);
 };
 
 /**
@@ -462,27 +541,116 @@ function activateButton () {
 
     sendBtn.setAttribute('disabled', '');
 
-    if (!checkfName() && fName.value !== '') {
-        console.log('hej');
+    let hasErrors = false;
+
+    if (!checkfName() ) {
+        hasErrors = true;
+        if (fName.value !== '') {
         warningfName.innerHTML = 'Felaktigt förnamn!';
-        return;
+        }
     } else {
         warningfName.innerHTML = '';  
     }
-    if (!checklName() && lName.value !== '') {
-        warninglName.innerHTML = 'Felaktigt efternamn!';
-        return;
+
+    if (!checklName() ) {
+        hasErrors = true;
+        if (lName.value !== '') {
+            warninglName.innerHTML = 'Felaktigt efternamn!';
+        }        
     } else {
         warninglName.innerHTML = '';  
     }
-    if (!checkPersonalId() && personalId.value !== '') {
-        warningPersNumber.innerHTML = 'Felaktigt personnummer!';
-        return;
+
+    if (!checkAddress() ) {
+        hasErrors = true;
+        if (address.value !== '') {
+            warningAddress.innerHTML = 'Felaktig adress!';
+        }        
     } else {
-        warningPersNumber.innerHTML = '';        
+        warningAddress.innerHTML = '';  
+    }
+
+    if (!checkPostNumber() ) {
+        hasErrors = true;
+        if (postNumber.value !== '') {
+            warningPostNumber.innerHTML = 'Felaktigt postnummer!';
+        }        
+    } else {
+        warningPostNumber.innerHTML = '';  
+    }
+
+    if (!checkCity() ) {
+        hasErrors = true;
+        if (city.value !== '') {
+            warningCity.innerHTML = 'Felaktigt ortnamn!';
+        }        
+    } else {
+        warningCity.innerHTML = '';  
+    }
+
+    if (!checkPhoneNumber() ) {
+        hasErrors = true;
+        if (phoneNumber.value !== '') {
+            warningPhone.innerHTML = 'Felaktigt telefonnummer!';
+        }        
+    } else {
+        warningPhone.innerHTML = '';        
+    }
+
+    if (!checkEmail() ) {
+        hasErrors = true;
+        if (eMail.value !== '') {
+            warningEmail.innerHTML = 'Felaktig e-postadress!';
+        }        
+    } else {
+        warningEmail.innerHTML = '';        
     } 
 
-    sendBtn.removeAttribute('disabled');
+    if (selectedPaymentOption === 'invoice') {
+
+        if (!checkPersonalId() ) {
+            hasErrors = true;
+            if (personalId.value !== '') {
+                warningPersNumber.innerHTML = 'Felaktigt personnummer!';
+            }        
+        } else {
+            warningPersNumber.innerHTML = '';        
+        }  
+    }  
+
+    if (selectedPaymentOption === 'card') {
+        if (!checkCardNumber() ) {
+            hasErrors = true;
+            if (cardNumber.value !== '') {
+                warningCardNumber.innerHTML = 'Felaktigt kortnummer!';
+            }        
+        } else {
+            warningCardNumber.innerHTML = '';        
+        }
+        if (cardCvc.value.length !== 3) {
+            hasErrors = true;
+            if (cardCvc.value !== '') {
+                warningCardCvc.innerHTML = 'Felaktigt CVC-nummer!';
+            } 
+        } else {
+            warningCardCvc.innerHTML = '';        
+        }
+    }
+    if (!hasErrors && checkOne.checked) {
+        sendBtn.removeAttribute('disabled');
+    }
+};
+
+/**
+ * Reset button
+ */
+
+const resetBtn = document.querySelector('#resetBtn');
+
+resetBtn.addEventListener('click', resetPage);
+
+function resetPage() {
+    location.reload();
 };
 
 

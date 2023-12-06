@@ -270,8 +270,11 @@ Cart section
 }
 
 /** 
-Form
+Forms
 */
+.discountSection {
+    margin-bottom: 30px;
+}
 
 form > label, .payOption, .persNumber > label, .cardNumber > label {
     display: flex;

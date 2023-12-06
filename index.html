@@ -72,12 +72,25 @@
                     <div class="cartFooterShipFee"><span id="cartFooterShipFee"></span></div>
                 </div>
                 <div class="cartFooterRow4">
+                    <div class="cartFooterDiscountCode">Ev. rabattkod: <span id="cartFooterDiscountCode"></span>:-</div>
+                </div>
+                <div class="cartFooterRow5">
                     <div class="cartFooterSumTot">Summa: <span id="cartFooterSumTot"></span>:-</div>
                 </div>
             </div>
         </section>
+        <section class="discountSection">
+            <form action=""> 
+                <label>Jag har en rabattkod
+                    <input type="text" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
+                    <span id="discountWarning"></span>
+                    <input type="button" id="discountBtn" value="Lägg till">
+                </label>
+            </form>
+        </section>
         <section class="formSection">
-            <form action="">
+            <h3>Dina uppgifter</h3>
+            <form action="">                
                 <label>Förnamn
                     <input type="text" name="fname" id="fname" placeholder="Förnamn" value="">
                     <span id="fNameWarning"></span>
@@ -91,7 +104,7 @@
                     <span id="addressWarning"></span>
                 </label>
                 <label>Postnummer
-                    <input type="number" name="postnumber" id="postnumber" placeholder="Postnummer" value="">
+                    <input type="text" name="postnumber" id="postnumber" placeholder="Postnummer" value="">
                     <span id="postNumberWarning"></span>
                 </label>
                 <label>Postort
@@ -119,20 +132,24 @@
                         <input type="radio" name="payoption" id="card" value="card" placeholder="Kort">
                     </label>
                 </div>
-                <div class="persNumber" id="persNumber">
+                <div class="persNumber" id="persNumberOption">
                     <label>Personnummer
                         <input type="text" name="persnumber" id="persNumberInput" placeholder="Personnummer" value="">
-                    <span></span></label>
+                        <span></span>
+                    </label>
                 </div>
-                <div class="cardNumber hidden" id="cardNumber">
+                <div class="cardNumber hidden" id="cardNumberOption">
                     <label>Kortnummer
                         <input type="number" name="cardnumber" id="cardNumberInput" placeholder="Kortnummer" value="">
+                        <span></span>
                     </label>
                     <label>Månad / År
                         <input type="month" name="monthyear" id="monthyear" placeholder="Månad / År" value="">
+                        <span></span>
                     </label>
                     <label>CVC
                         <input type="number" name="cvc" id="cvc" placeholder="CVC" value="">
+                        <span></span>
                     </label>
                 </div>
                 <div class="checkbox1">
@@ -144,10 +161,6 @@
                     <input type="checkbox" name="checktwo" id="checktwo" value="">
                     <label for="checktwo">Ja tack, sänd mig ert nyhetsbrev!</label>               
                 </div>
-                <label>Jag har en rabattkod
-                    <input type="number" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
-                    <span id="discountWarning"></span>
-                </label>
                 <div class="buttons">
                     <input id="submitBtn" type="submit" value="Beställ!" disabled>
                     <input id="resetBtn" type="reset" value="Rensa formulär!">

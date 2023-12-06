@@ -54,8 +54,12 @@
 }
 
 /** 
-Form
+Forms
 */
+.discountSection label {
+    grid-column: span 1;
+}
+
 form {
     max-width: 100%;
     display: grid;
@@ -71,11 +75,8 @@ form {
         .payOption {
             grid-column: span 4;
         }
-        .persNumber {
+        .persNumber, .cardNumber {
             grid-column: span 3;
-        }
-        .cardNumber {
-            grid-column: span 6;
         }
         .checkbox1, .checkbox2 {
             grid-column: span 6;
