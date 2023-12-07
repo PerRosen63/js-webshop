@@ -1,5 +1,19 @@
+
+/*Max widths etc.*/
+
 header, main {
     max-width: 1200px;
     margin: 0 auto;
     flex-direction: row;
+    grid-template-areas: 'logo pageTitle cartIconContainer hamburgerContainer';
+}
+
+header .pageTitle {
+    margin-top: 15px;
+}
+
+/*Radio buttons*/
+
+.payOption label {
+    background-color: transparent;
 }

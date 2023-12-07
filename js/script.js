@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * Product object array
+ */
+
 const products = [
     {
         name: 'Affisch',
@@ -124,20 +128,29 @@ const products = [
 ];
 
 
-const prodContainer = document.querySelector('#productContainer');
+/* Variables */
+
+const prodContainer = document.querySelector('#productContainer'); 
 const cartContainer = document.querySelector('#cartContainer');
 
-/*Timeout 15min*/
-/* let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
+const sendBtn = document.querySelector('#submitBtn'); //send button
+
+
+/**
+ * Timeout 15min
+ */
+
+let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
 
 function customerMsg() {
     alert('Tiden har gått ut! Du måste börja om.');
     location.reload();
-} */
+}
 
 /**
  * Sort
  */
+
 const selectProduct = document.querySelector('#sort');
 
 selectProduct.addEventListener('change', sortProduct);
@@ -179,38 +192,72 @@ function sortProduct() {
     printProducts();
 }; 
 
-/*Minus-knapp*/
+/**
+ * Background effect on plus minus delete
+ */
+
+function effect() {
+    cartContainer.animate({backgroundColor:['#ff0000', '#000000']},{duration:800,fill:'forwards'});
+}
+
+/*Minus button*/
 
 function decreaseAmount(e) {
     const index = e.currentTarget.dataset.id
     if (products[index].amount > 0) {
     products[index].amount -= 1;
+    effect();
     printProducts();
     printCartProducts();
     }
 };
 
-/*Plus-knapp*/
+/*Plus button*/
 
 function increaseAmount(e) {
     const index = e.currentTarget.dataset.id
     products[index].amount += 1;
+    effect();
     printProducts();
 };  
 
-/*Ta bort artikel från varukorg*/
+/*Remove from cart*/
 
 function resetAmount(e) {
     const index = e.currentTarget.dataset.id
     products[index].amount = 0;
+    effect();
     printProducts();
     printCartProducts();
 }; 
 
 
-    
 /**
- * Produktutskrift
+ *Toggles between invoice or card payment options
+ */
+
+const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option radio buttons
+const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
+const cardOption = document.querySelector('#cardNumberOption'); //Payment option card div
+
+let selectedPaymentOption = 'card'; //default
+
+radioInvoiceCard.forEach(radioBtn => {
+    radioBtn.addEventListener('change', switchPayment);
+    radioBtn.addEventListener('change', activateButton);
+    
+});
+
+function switchPayment(e) {
+    invoiceOption.classList.toggle('hidden');
+    cardOption.classList.toggle('hidden');
+    
+    selectedPaymentOption = e.target.value;
+} 
+
+  
+/**
+ * Product print
  */
 
 function printProducts() {
@@ -233,14 +280,17 @@ function printProducts() {
             price = Math.round(price * 11.5/10); 
         } 
 
-    //let sum = amount * product.price;
+    /*Sum variable*/
+
     let sum = amount * price;
+
     /*Mängdrabatt 10% vid 10 eller fler/vara*/
     if (amount > 9) {
         sum = sum * 0.9; //10% discount
     }
 
-    //Rating
+    /*Rating*/
+
     const productRating = product.rating;
     const productRatingSuffix = productRating * 10;
     
@@ -284,7 +334,7 @@ function printProducts() {
 };
 
 /**
- * Varukorg
+ * Cart
  */
 
 function printCartProducts() {
@@ -333,6 +383,7 @@ function printCartProducts() {
         }
         
     });
+
     const cartFooterAmount  = document.querySelector('#cartFooterAmount');
     const cartIconCircle = document.querySelector('#cartIconCircle');
     const cartFooterSum = document.querySelector('#cartFooterSum');
@@ -355,6 +406,8 @@ function printCartProducts() {
     if (hours >= 4 && hours < 10 && day == 1) {
         cartFooterDiscount.innerHTML = Math.round(footerSum * 0.1);
         footerSum = footerSum * 0.9;    
+    } else {
+        cartFooterDiscount.innerHTML = 0;
     }
 
 /*Gratis frakt*/
@@ -370,14 +423,14 @@ function printCartProducts() {
     const discountCode = document.querySelector('#discountcode'); 
             
         if (discountCode.value === 'rabatt') {
+            cartFooterDiscountCode.innerHTML = '5% ' + Math.round(footerSum * 0.05);    
             footerSum = footerSum * 0.95;
-            cartFooterDiscountCode.innerHTML = Math.round(footerSum * 0.05);
-            console.log(footerSum);
+        }   else {
+            cartFooterDiscountCode.innerHTML = 0;
         }
 
 /*Totalsumma*/
     cartFooterSumTot.innerHTML = Math.round(footerSum);
-
     
     const cartMinusButtons = document.querySelectorAll('.cartMinus');
     const cartPlusButtons = document.querySelectorAll('.cartPlus'); 
@@ -395,6 +448,40 @@ function printCartProducts() {
         btn.addEventListener('click', resetAmount);
     });
 
+    /*Inaktivera Faktura över 800:-*/
+
+    const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
+    const personalId = document.querySelector('#persNumberInput'); //personal number
+    const radioBtnInvoice = document.querySelector('#invoice');
+
+    if (footerSum > 801) {
+        radioBtnInvoice.disabled = true;
+        personalId.disabled = true;
+    } else {
+        radioBtnInvoice.disabled = false;
+        personalId.disabled = false;
+    } 
+
+    /**
+     * Order button and confirmation of order
+     */
+
+    const confSection = document.querySelector('#confSection');
+    sendBtn.addEventListener('click', sendOrder);
+
+    const confSumTot = document.querySelector('#confSumTot');
+    const confAmount = document.querySelector('#confAmount');
+
+    function sendOrder() {
+        confSection.classList.remove('hidden');
+    
+        const fNameValue = fName.value;
+        const confName = document.querySelector('#foreName');
+        confName.innerHTML = fNameValue;
+        confAmount.innerHTML = footerAmount;
+        confSumTot.innerHTML = Math.round(footerSum);
+    }
+
 }
 
 /**
@@ -410,7 +497,6 @@ function printCartProducts() {
 
 printProducts();
 
-
 /**
  * Form
  */
@@ -425,22 +511,14 @@ const portCode = document.querySelector('#portkod');
 const phoneNumber = document.querySelector('#tel');
 const eMail = document.querySelector('#email');
 
-const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option radio buttons
-const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
-const cardOption = document.querySelector('#cardNumberOption'); //Payment option card div
-
 const personalId = document.querySelector('#persNumberInput'); //personal number
 
 const cardNumber = document.querySelector('#cardNumberInput'); //card number
 const cardMonthYear = document.querySelector('#monthyear'); //month/year
 const cardCvc = document.querySelector('#cvc'); //cvc
 
-
 const checkOne = document.querySelector('#checkone');
 const checkTwo = document.querySelector('#checktwo');
-
-const sendBtn = document.querySelector('#submitBtn');
-
 
 // Warnings
 const warningfName = document.querySelector('#fNameWarning');
@@ -457,23 +535,6 @@ const warningCardNumber = document.querySelector('#cardNumberOption span');//Car
 const warningCardMonthYear = document.querySelector('#monthyear span');//Card
 const warningCardCvc = document.querySelector('#cvc+span');//Card
 
-
-
-
-//Toggles between invoice or card payment options
-
-let selectedPaymentOption = 'invoice'; //default
-
-radioInvoiceCard.forEach(radioBtn => {
-    radioBtn.addEventListener('change', switchPayment)
-});
-
-function switchPayment(e) {
-    invoiceOption.classList.toggle('hidden');
-    cardOption.classList.toggle('hidden');
-    
-    selectedPaymentOption = e.target.value;
-}
 
 /* Event listeners to activate order button */
 
@@ -493,10 +554,10 @@ cardCvc.addEventListener('input', activateButton);//Card cvc
 checkOne.addEventListener('click', activateButton ); //agree box
 
 /* Regex check */
-//const nameRegEx = new RegExp(/^[a-zA-Z\u0080-\u00FF]+$/); //check Förnamn Efternamn Postort
 const nameRegEx = new RegExp(/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/); //check Förnamn Efternamn Postort
 const addressRegEx = new RegExp(/[A-Za-z\u0080-\uFFFF -]{2,}/); //check address
 const postNumberRegEx = new RegExp(/^\d{3} \d{2}$/); //check postnumber
+const portCodeRegEx = new RegExp(/^[0-9]+$/); //Number only - port code
 const phoneNumberRegEx = new RegExp(/^(([+]46)\s*(7)|07)[02369]\s*(\d{4})\s*(\d{3})$/); //check phonenumber
 const eMailRegEx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/); //check emailaddress
 
@@ -519,6 +580,10 @@ function checkPostNumber() {
 function checkCity() {
     return nameRegEx.exec(city.value);    
 };
+function checkPortCode() {
+    return portCodeRegEx.exec(portCode.value);    
+};
+
 function checkPhoneNumber() {
     return phoneNumberRegEx.exec(phoneNumber.value);    
 };
@@ -588,6 +653,15 @@ function activateButton () {
         warningCity.innerHTML = '';  
     }
 
+    if (!checkPortCode() ) {
+        hasErrors = true;
+        if (portCode.value !== '') {
+            warningPortCode.innerHTML = 'Felaktig portkod!';
+        }        
+    } else {
+        warningPortCode.innerHTML = '';  
+    }
+
     if (!checkPhoneNumber() ) {
         hasErrors = true;
         if (phoneNumber.value !== '') {
@@ -607,7 +681,7 @@ function activateButton () {
     } 
 
     if (selectedPaymentOption === 'invoice') {
-
+        sendBtn.setAttribute('disabled', '');
         if (!checkPersonalId() ) {
             hasErrors = true;
             if (personalId.value !== '') {
@@ -642,15 +716,24 @@ function activateButton () {
 };
 
 /**
- * Reset button
+ * Reset buttons
  */
 
 const resetBtn = document.querySelector('#resetBtn');
+const closeConf = document.querySelector('#closeConf');
 
 resetBtn.addEventListener('click', resetPage);
+closeConf.addEventListener('click', resetPage);
 
 function resetPage() {
+    window.scrollTo(0, 0);
     location.reload();
 };
+
+/**
+ * Footer year
+ */
+
+document.querySelector('#year').innerHTML = new Date().getFullYear();
 
 

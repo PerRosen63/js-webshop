@@ -1,11 +1,29 @@
-/* header {
+
+/**
+Sortsection
+*/
+
+.sortSection {
     flex-direction: row;
-} */
+    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/**
+Product section
+*/
 
 .productContainer {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+    article {
+        border-bottom: none;
+    }
 }
 
+/**
+Cart section
+*/
 
 .cartRow, .labelRow {
     display: grid;
@@ -38,16 +56,19 @@
     }
 }
 
-.cartFooterRow1 {
+.cartFooter > div {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 10px;
-    .cartFooterAmount {
-        grid-column: 5/9;
-        justify-self: center;
-        margin-right: 86px;;
+    > div:first-child {
+        grid-column: 1/9;
     }
-    .cartFooterSum {
+    .cartFooterAmount {
+        grid-column: 5/9!important;
+        justify-self: center;
+        margin-right: 86px;
+    }
+    > div:nth-child(2) {
         grid-column: 9/12;
         justify-self: end;
     }
@@ -56,6 +77,7 @@
 /** 
 Forms
 */
+
 .discountSection label {
     grid-column: span 1;
 }
@@ -65,8 +87,7 @@ form {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 10px;
-/*     grid-template-rows: repeat(8, auto);
- */        > label {
+        > label {
             grid-column: span 3;
     }
         label:nth-child(3) {

@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="assets\logga_skiss01b_cropped.jpg" width="300" height="auto" alt="logo">
+            <img src="assets\logga_skiss01b_cropped.jpg" width="350" height="auto" alt="logo">
         </div>
         <div class="pageTitle">        
             <h1>Quick & Dirty Shop</h1>
@@ -34,12 +34,12 @@
     <main>
         <section class="sortSection">
             <div class="bannerColumn">
-                <h6>10% på de varor du handlar mer än 10 exemplar av!</h6>
+                <h4>10% på de varor du handlar mer än 10 exemplar av!</h4>
             </div>
             <div class="sortColumn">
                 <label for="sort"></label>
                 <select name="sort" id="sort">
-                    <option value="">Välj</option>
+                    <option value="">Sortera</option>
                     <option value="produkt">Produkt</option>
                     <option value="kategori">Kategori</option>
                     <option value="pris">Pris</option>
@@ -65,17 +65,20 @@
                     <div class="cartFooterSum">Varusumma: <span id="cartFooterSum"></span>:-</div>
                 </div>
                 <div class="cartFooterRow2">
-                    <div class="cartFooterDiscount">Måndagsmorgonrabatt 03.00 - 10.00: 10 % på hela beställningen: <span id="cartFooterDiscount"></span>:-</div>
+                    <div class="cartFooterDiscount">Måndagsmorgonrabatt 03.00 - 10.00: 10 % på hela beställningen: </div>
+                    <div> - <span id="cartFooterDiscount"></span>:-</div>
                 </div>
                 <div class="cartFooterRow3">
-                    <div class="cartFooterShipPercent">Minst 15 varor = gratis frakt! Annars 10% av tot.bel. + 25kr: <span id="cartFooterShipPercent"></span>:-</div>
-                    <div class="cartFooterShipFee"><span id="cartFooterShipFee"></span></div>
+                    <div class="cartFooterShipPercent">Minst 15 varor = gratis frakt! Annars 10% av tot.bel. + 25kr: </div>
+                    <div class="cartFooterShipFee"><span id="cartFooterShipFee"></span>:-</div>
                 </div>
                 <div class="cartFooterRow4">
-                    <div class="cartFooterDiscountCode">Ev. rabattkod: <span id="cartFooterDiscountCode"></span>:-</div>
+                    <div class="cartFooterDiscountCode">Ev. rabattkod: </div>
+                    <div>- <span id="cartFooterDiscountCode"></span>:-</div>
                 </div>
                 <div class="cartFooterRow5">
-                    <div class="cartFooterSumTot">Summa: <span id="cartFooterSumTot"></span>:-</div>
+                    <div class="cartFooterSumTot">Summa: </div>
+                    <div><span id="cartFooterSumTot"></span>:-</div>
                 </div>
             </div>
         </section>
@@ -84,8 +87,8 @@
                 <label>Jag har en rabattkod
                     <input type="text" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
                     <span id="discountWarning"></span>
-                    <input type="button" id="discountBtn" value="Lägg till">
                 </label>
+                <input type="button" class="discountBtn" id="discountBtn" value="Lägg till">
             </form>
         </section>
         <section class="formSection">
@@ -125,20 +128,21 @@
                 </label>
                 <div class="payOption">
                     <p>Välj betalsätt:</p>
-                    <label>Faktura
-                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" checked value="">
-                    </label>
+                    
                     <label>Kort
-                        <input type="radio" name="payoption" id="card" value="card" placeholder="Kort">
+                        <input type="radio" name="payoption" id="card" value="card" placeholder="Kort" checked>
+                    </label>
+                    <label>Faktura
+                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" value="">&nbsp;&nbsp;<em>max 800:-</em></input>
                     </label>
                 </div>
-                <div class="persNumber" id="persNumberOption">
+                <div class="persNumber hidden" id="persNumberOption">
                     <label>Personnummer
                         <input type="text" name="persnumber" id="persNumberInput" placeholder="Personnummer" value="">
                         <span></span>
                     </label>
                 </div>
-                <div class="cardNumber hidden" id="cardNumberOption">
+                <div class="cardNumber" id="cardNumberOption">
                     <label>Kortnummer
                         <input type="number" name="cardnumber" id="cardNumberInput" placeholder="Kortnummer" value="">
                         <span></span>
@@ -158,19 +162,20 @@
                     <span id="checkoneWarning"></span>               
                 </div>
                 <div class="checkbox2">
-                    <input type="checkbox" name="checktwo" id="checktwo" value="">
+                    <input type="checkbox" name="checktwo" id="checktwo" value="" checked>
                     <label for="checktwo">Ja tack, sänd mig ert nyhetsbrev!</label>               
                 </div>
                 <div class="buttons">
-                    <input id="submitBtn" type="submit" value="Beställ!" disabled>
-                    <input id="resetBtn" type="reset" value="Rensa formulär!">
+                    <input id="submitBtn" class="submitBtn" type="button" value="Beställ!" disabled>
+                    <input id="resetBtn" class="resetBtn" type="reset" value="Rensa formulär!">
                 </div>           
             </form>
         </section>
-        <section class="confSection" id="confSection">
+        <section class="confSection hidden" id="confSection">
+            <button id="closeConf" class="material-symbols-outlined">cancel</button>
             <h3>Bekräftelse</h3>
             <p>Tack, <span id="foreName"></span> för din beställning!</p>
-            <p>Du har beställt varor för <span id="confSum"></span>:-. Porto tillkommer med <span id="shipTot"></span>:-. Totalt <span id="confSumTot"></span>:- inkl. moms.</p>
+            <p>Du har beställt <span id="confAmount"></span>st varor. Totalt <span id="confSumTot"></span>:- inkl. moms och frakt.</p>
             <p>Vi kommer att leverera dina varor inom 5 dagar.</p>
         </section>
     </main>

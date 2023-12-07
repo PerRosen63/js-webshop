@@ -6,10 +6,10 @@ $black: #000000;
 $white: #ffffff;
 $red: #ff0000;
 
-
 /**
  reset 
  */
+
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +33,11 @@ fonts
     font-family: Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+p, div, span {
+    font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6, .discountBtn, .submitBtn, .resetBtn  {
     font-family: 'Bowlby One', sans-serif;
     letter-spacing: 1.2px;
     font-weight: 400;
@@ -47,7 +51,6 @@ Icons
 
 .material-symbols-outlined {
     border-color: transparent; 
-    /* border: 1px solid transparent; */
     background-color: $black;
     color: $white;
   font-variation-settings:
@@ -58,11 +61,9 @@ Icons
 }
 
 
-
 /** 
 Images 
 */
-
 
 img {
     max-width: 100%;
@@ -71,18 +72,22 @@ img {
     margin-bottom: 5px;
 }
 
-/*Hidden*/
+/**
+Hidden
+*/
 
 .hidden {
     display: none!important;
 }
 
-//Body
+/**
+Body
+*/
 
 body {
     background-color: $black;
     color: $white;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 /**
@@ -92,7 +97,6 @@ Header
 header {
     display: grid;
     grid-template-areas: 'hamburgerContainer cartIconContainer' 'logo logo' 'pageTitle pageTitle';
-    //flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
     > div {
@@ -109,6 +113,7 @@ header {
         grid-area: pageTitle;
         justify-self: center;
         text-align: center;
+        margin-bottom: 20px;
     }
     .cartIconContainer {
         grid-area: cartIconContainer;
@@ -135,8 +140,7 @@ header {
         }
         #cartIconSum {
             margin-left: 30px;
-        }
-        
+        }    
     }
     .hamburgerContainer {
         grid-area: hamburgerContainer;
@@ -147,6 +151,35 @@ header {
     }
     }
 
+/*
+Main
+*/
+
+main {
+    padding: 20px;
+}
+
+/**
+Sortsection
+*/
+
+.sortSection {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    .bannerColumn h4 {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .sortColumn select {
+        font-size: 1.4rem;
+        /* text-transform: uppercase; */
+        width: 100%;
+        option:first-child {
+            display: none;
+        }
+    }
+}
 
 /**
 Product section
@@ -157,15 +190,19 @@ Product section
     gap: 20px;
     article {
         display: flex;
-    flex-direction: column;
-    align-items: center;
-    h3, p, h4, .productRating {
+        flex-direction: column;
+        align-items: center;
+        border-bottom: 1px solid $white;
+        h3, p, h4, .productRating {
         text-align: center;
         margin-top: 5px;
     }
     .amountContainer {
         display: flex;
         align-items: flex-start;
+        button {
+            font-size: 2.4rem;
+        }
         button:hover {
             border-top: 1px solid transparent;
         }
@@ -174,7 +211,10 @@ Product section
 }
 
 
-//Stars
+/**
+Stars/rating
+*/
+
 .productRating {
     text-align: center;
     .material-symbols-outlined::before {
@@ -228,7 +268,7 @@ Cart section
 */
 
 .cartSection {
-    margin: 40px 0;
+    margin: 60px 0;
      h2 {
     text-align: center;
      }
@@ -250,30 +290,54 @@ Cart section
     .cartAmountContainer {
         display: flex;
         justify-content: flex-start;
+        button {
+            font-size: 2.4rem;
+        }
             p {
             display: inline-block;
-            padding: 10px;
-            }
+            padding: 14px 10px;
+        }
     }
     .productPrice, .sum {
         span {
             font-weight: 700;
         }
     }
+    button {
+        font-size: 2.4rem;
+    }
     button:hover {
         border-top: none;
     }
 }
 
+.cartFooterRow1 {
+    display: flex;
+    justify-content: space-between;
+    border-top: 3px solid $white;
+}
 .cartFooter > div {
     border-bottom: 1px solid $white;
+    padding: 5px 0;
+    > div:nth-child(2) {
+        text-align: right;
+    }
 }
 
 /** 
 Forms
 */
+
 .discountSection {
     margin-bottom: 30px;
+    form {
+        align-items: end;
+        .discountBtn {
+            font-size: 1rem;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+    }
 }
 
 form > label, .payOption, .persNumber > label, .cardNumber > label {
@@ -286,6 +350,7 @@ form > label, .payOption, .persNumber > label, .cardNumber > label {
         font-size: 1rem;
     }
 }
+
 .payOption {
     flex-direction: row;
     justify-content: space-between;
@@ -295,14 +360,17 @@ form > label, .payOption, .persNumber > label, .cardNumber > label {
         flex-direction: row;
         align-items: center;
         padding: 10px;
+        background-color: #444444;
         input {
             margin-left: 5px;
         }
     }
 }
+
 .checkbox1,.checkbox2 {
     margin-bottom: 10px;
 }
+
 .buttons {
     display: flex;
     flex-direction: column;
@@ -311,8 +379,37 @@ form > label, .payOption, .persNumber > label, .cardNumber > label {
         padding: 10px 0;
         font-size: 1rem;
         text-transform: uppercase;
+        text-align: center;
     }
 }
 
+/**
+Confirmation box
+*/
 
+.confSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: red;
+    padding: 20px 10px 50px;
+    margin: 30px 0;
+    button {
+        align-self: flex-end;
+        background-color: $red;
+    }
+    p {
+        text-align: center;
+    }
+
+}
+
+/** 
+Footer
+*/
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
 
