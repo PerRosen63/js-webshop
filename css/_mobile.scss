@@ -33,11 +33,21 @@ fonts
     font-family: Helvetica, Arial, sans-serif;
 }
 
-p, div, span {
+p,
+div,
+span {
     font-size: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6, .discountBtn, .submitBtn, .resetBtn  {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.discountBtn,
+.submitBtn,
+.resetBtn {
     font-family: 'Bowlby One', sans-serif;
     letter-spacing: 1.2px;
     font-weight: 400;
@@ -49,14 +59,14 @@ Icons
 */
 
 .material-symbols-outlined {
-    border-color: transparent; 
+    border-color: transparent;
     background-color: $black;
     color: $white;
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
 }
 
 
@@ -76,7 +86,7 @@ Hidden
 */
 
 .hidden {
-    display: none!important;
+    display: none !important;
 }
 
 /**
@@ -98,22 +108,27 @@ header {
     grid-template-areas: 'hamburgerContainer cartIconContainer' 'logo logo' 'pageTitle pageTitle';
     align-items: center;
     justify-content: space-between;
-    > div {
+
+    >div {
         padding: 20px;
     }
+
     .logo {
         grid-area: logo;
         justify-self: center;
+
         img {
             max-width: 100%;
         }
     }
+
     .pageTitle {
         grid-area: pageTitle;
         justify-self: center;
         text-align: center;
         margin-bottom: 20px;
     }
+
     .cartIconContainer {
         grid-area: cartIconContainer;
         justify-self: end;
@@ -121,9 +136,11 @@ header {
         display: flex;
         align-items: center;
         min-width: 160px;
+
         .cartIcon {
             font-size: 2rem;
         }
+
         #cartIconCircle {
             width: 30px;
             height: 30px;
@@ -137,18 +154,21 @@ header {
             align-items: center;
             justify-content: center;
         }
+
         #cartIconSum {
             margin-left: 30px;
-        }    
+        }
     }
+
     .hamburgerContainer {
         grid-area: hamburgerContainer;
         justify-self: start;
+
         .hamburgerIcon {
             font-size: 2rem;
         }
     }
-    }
+}
 
 /*
 Main
@@ -166,10 +186,12 @@ Sortsection
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+
     .bannerColumn h4 {
         text-align: center;
         padding: 20px 0;
     }
+
     .sortColumn select {
         font-size: 1.4rem;
         /* text-transform: uppercase; */
@@ -188,25 +210,33 @@ Product section
 .productContainer {
     display: grid;
     gap: 20px;
+
     article {
         display: flex;
         flex-direction: column;
         align-items: center;
         border-bottom: 1px solid $white;
-        h3, p, h4, .productRating {
-        text-align: center;
-        margin-top: 5px;
-    }
-    .amountContainer {
-        display: flex;
-        align-items: flex-start;
-        button {
-            font-size: 2.4rem;
+
+        h3,
+        p,
+        h4,
+        .productRating {
+            text-align: center;
+            margin-top: 5px;
         }
-        button:hover {
-            border-top: 1px solid transparent;
+
+        .amountContainer {
+            display: flex;
+            align-items: flex-start;
+
+            button {
+                font-size: 2.4rem;
+            }
+
+            button:hover {
+                border-top: 1px solid transparent;
+            }
         }
-    }
     }
 }
 
@@ -217,49 +247,59 @@ Stars/rating
 
 .productRating {
     text-align: center;
+
     .material-symbols-outlined::before {
         position: absolute;
         content: "";
         width: 24px;
-        height: 24px;              
+        height: 24px;
     }
 }
+
 //whole stars
 .productRating-0 .material-symbols-outlined:nth-child(n+1):nth-child(-n+5)::before {
-    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -24px 0 rgba(0, 0, 0, 0.7);
 }
 
-.productRating-5 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before, .productRating-10 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before {
-    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+.productRating-5 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before,
+.productRating-10 .material-symbols-outlined:nth-child(n+2):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0, 0, 0, 0.7);
 }
 
-.productRating-15 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before, .productRating-20 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before {
-    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+.productRating-15 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before,
+.productRating-20 .material-symbols-outlined:nth-child(n+3):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0, 0, 0, 0.7);
 }
 
-.productRating-25 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before, .productRating-30 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before {
-    box-shadow: inset -24px 0 rgba(0,0,0,0.7);
+.productRating-25 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before,
+.productRating-30 .material-symbols-outlined:nth-child(n+4):nth-child(-n+5)::before {
+    box-shadow: inset -24px 0 rgba(0, 0, 0, 0.7);
 }
 
-.productRating-35 .material-symbols-outlined:nth-child(5)::before, .productRating-40 .material-symbols-outlined:nth-child(5)::before {
-        box-shadow: inset -24px 0 rgba(0,0,0,0.7);
-    }
+.productRating-35 .material-symbols-outlined:nth-child(5)::before,
+.productRating-40 .material-symbols-outlined:nth-child(5)::before {
+    box-shadow: inset -24px 0 rgba(0, 0, 0, 0.7);
+}
 
 //half stars
 .productRating-5 .material-symbols-outlined:nth-child(1)::before {
-    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -12px 0 rgba(0, 0, 0, 0.7);
 }
+
 .productRating-15 .material-symbols-outlined:nth-child(2)::before {
-    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -12px 0 rgba(0, 0, 0, 0.7);
 }
+
 .productRating-25 .material-symbols-outlined:nth-child(3)::before {
-    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -12px 0 rgba(0, 0, 0, 0.7);
 }
+
 .productRating-35 .material-symbols-outlined:nth-child(4)::before {
-    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -12px 0 rgba(0, 0, 0, 0.7);
 }
+
 .productRating-45 .material-symbols-outlined:nth-child(5)::before {
-    box-shadow: inset -12px 0 rgba(0,0,0,0.7);
+    box-shadow: inset -12px 0 rgba(0, 0, 0, 0.7);
 }
 
 
@@ -269,14 +309,16 @@ Cart section
 
 .cartSection {
     margin: 60px 0;
+
     h2 {
-    text-align: center;
-    margin-bottom: 20px;
+        text-align: center;
+        margin-bottom: 20px;
     }
 }
 
 .labelRow {
     border-bottom: 2px solid $white;
+
     h6 {
         display: none;
     }
@@ -288,25 +330,32 @@ Cart section
     gap: 10px;
     padding: 10px 0;
     border-bottom: 1px solid $white;
+
     .cartAmountContainer {
         display: flex;
         justify-content: flex-start;
+
         button {
             font-size: 2.4rem;
         }
-            p {
+
+        p {
             display: inline-block;
             padding: 14px 10px;
         }
     }
-    .productPrice, .sum {
+
+    .productPrice,
+    .sum {
         span {
             font-weight: 700;
         }
     }
+
     button {
         font-size: 2.4rem;
     }
+
     button:hover {
         border-top: none;
     }
@@ -317,10 +366,12 @@ Cart section
     justify-content: space-between;
     border-top: 3px solid $white;
 }
-.cartFooter > div {
+
+.cartFooter>div {
     border-bottom: 1px solid $white;
     padding: 5px 0;
-    > div:nth-child(2) {
+
+    >div:nth-child(2) {
         text-align: right;
     }
 }
@@ -331,11 +382,14 @@ Forms
 
 .discountSection {
     margin-bottom: 30px;
+
     .discountTitle {
         display: none;
     }
+
     form {
         align-items: end;
+
         .discountBtn {
             font-size: 1rem;
             height: 30px;
@@ -344,11 +398,15 @@ Forms
     }
 }
 
-form > label, .payOption, .persNumber > label, .cardNumber > label {
+form>label,
+.payOption,
+.persNumber>label,
+.cardNumber>label {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     font-size: 1rem;
+
     input {
         height: 30px;
         font-size: 1rem;
@@ -359,25 +417,29 @@ form > label, .payOption, .persNumber > label, .cardNumber > label {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     label {
         display: flex;
         flex-direction: row;
         align-items: center;
         padding: 10px;
         background-color: #444444;
+
         input {
             margin-left: 5px;
         }
     }
 }
 
-.checkbox1,.checkbox2 {
+.checkbox1,
+.checkbox2 {
     margin-bottom: 10px;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
+
     input {
         margin: 10px 30px;
         padding: 10px 0;
@@ -398,10 +460,12 @@ Confirmation box
     background: red;
     padding: 20px 10px 50px;
     margin: 30px 0;
+
     button {
         align-self: flex-end;
         background-color: $red;
     }
+
     p {
         text-align: center;
     }
@@ -416,4 +480,3 @@ footer {
     text-align: center;
     margin-top: 20px;
 }
-
