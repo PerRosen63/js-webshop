@@ -42,7 +42,6 @@ h1, h2, h3, h4, h5, h6, .discountBtn, .submitBtn, .resetBtn  {
     letter-spacing: 1.2px;
     font-weight: 400;
     text-transform: uppercase;
-    //padding: 20px;
 }
 
 /**
@@ -175,15 +174,16 @@ Sortsection
         font-size: 1.4rem;
         /* text-transform: uppercase; */
         width: 100%;
-        option:first-child {
-            display: none;
-        }
     }
 }
 
 /**
 Product section
 */
+.productTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 .productContainer {
     display: grid;

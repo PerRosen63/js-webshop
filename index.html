@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" >
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets\logga_skiss01b_cropped.jpg" width="350" height="auto" alt="logo">
+            <img src="assets/logga_skiss01b_cropped.jpg" width="350" alt="logo">
         </div>
         <div class="pageTitle">        
             <h1>Quick & Dirty Shop</h1>
@@ -48,6 +48,7 @@
             </div>
         </section>
         <section class="productSection">
+            <h2 class="productTitle">Produkter</h2>
             <div id="productContainer" class="productContainer"></div>
         </section>
         <section class="cartSection">
@@ -83,7 +84,7 @@
             </div>
         </section>
         <section class="discountSection">
-            <form action=""> 
+            <form> 
                 <label>Jag har en rabattkod
                     <input type="text" name="discountcode" id="discountcode" placeholder="Rabattkod" value="">
                     <span id="discountWarning"></span>
@@ -93,7 +94,7 @@
         </section>
         <section class="formSection">
             <h3>Dina uppgifter</h3>
-            <form action="">                
+            <form>                
                 <label>Förnamn
                     <input type="text" name="fname" id="fname" placeholder="Förnamn" value="">
                     <span id="fNameWarning"></span>
@@ -130,10 +131,10 @@
                     <p>Välj betalsätt:</p>
                     
                     <label>Kort
-                        <input type="radio" name="payoption" id="card" value="card" placeholder="Kort" checked>
+                        <input type="radio" name="payoption" id="card" value="card" checked>
                     </label>
                     <label>Faktura
-                        <input type="radio" name="payoption" id="invoice" value="invoice" placeholder="Faktura" value="">&nbsp;&nbsp;<em>max 800:-</em></input>
+                        <input type="radio" name="payoption" id="invoice" value="invoice" value="">&nbsp;&nbsp;<em>max 800:-</em>
                     </label>
                 </div>
                 <div class="persNumber hidden" id="persNumberOption">
@@ -148,7 +149,7 @@
                         <span></span>
                     </label>
                     <label>Månad / År
-                        <input type="month" name="monthyear" id="monthyear" placeholder="Månad / År" value="">
+                        <input type="month" name="monthyear" id="monthyear" value="">
                         <span></span>
                     </label>
                     <label>CVC
