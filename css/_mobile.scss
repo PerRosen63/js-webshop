@@ -269,9 +269,10 @@ Cart section
 
 .cartSection {
     margin: 60px 0;
-     h2 {
+    h2 {
     text-align: center;
-     }
+    margin-bottom: 20px;
+    }
 }
 
 .labelRow {
@@ -330,6 +331,9 @@ Forms
 
 .discountSection {
     margin-bottom: 30px;
+    .discountTitle {
+        display: none;
+    }
     form {
         align-items: end;
         .discountBtn {
