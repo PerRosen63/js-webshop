@@ -34,5 +34,7 @@ https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-PerRosen63/
 
 ![](validation/css_validate.JPG)
 
+![](validation/Lighthouse.JPG)
+
 
 
