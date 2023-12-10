@@ -3,7 +3,7 @@
 
 # Webbshop - inlämningsuppgift på delkursen JavaScript Grund i YH-programmet Front End Developer Distans 2023 på Medieinstitutet Stockholm
 
-En webbshop på endast en html-sida där produkter, som hämtats in med hjälp av JS via en objekt-array, kan väljas med hjälp av plus- och minusknappar och läggas till i en egen varukorgsektion med delsummor, rabatter och avgifter, inklusive specialregler. Ett formulär med beställarens uppgifter valideras innan beställningsknapp görs tillgänglig.
+En webbshop på endast en html-sida där produkter, som hämtats in med hjälp av JS via en objekt-array, kan väljas med hjälp av plus- och minusknappar och läggas till i en egen varukorgsektion med delsummor, rabatter och avgifter, inklusive specialregler. Ett formulär med beställarens uppgifter valideras innan beställningsknapp görs tillgänglig. En sorteringsfunktion finns också.
 
 ## Lite om mig
 

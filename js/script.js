@@ -130,14 +130,14 @@ const products = [
 
 /* Variables */
 
-const prodContainer = document.querySelector('#productContainer'); 
-const cartContainer = document.querySelector('#cartContainer');
+const prodContainer = document.querySelector('#productContainer'); //products container
+const cartContainer = document.querySelector('#cartContainer'); //cart container
 
 const sendBtn = document.querySelector('#submitBtn'); //send button
 
 
 /**
- * Timeout 15min
+ * Timeout 15min inactivity
  */
 
 let timeOut = setTimeout(customerMsg, 1000 * 60 * 15);
@@ -200,7 +200,7 @@ function effect() {
     cartContainer.animate({backgroundColor:['#ff0000', '#000000']},{duration:800,fill:'forwards'});
 }
 
-/*Minus button*/
+/*Minus button product and cart*/
 
 function decreaseAmount(e) {
     const index = e.currentTarget.dataset.id
@@ -212,7 +212,7 @@ function decreaseAmount(e) {
     }
 };
 
-/*Plus button*/
+/*Plus button product and cart*/
 
 function increaseAmount(e) {
     const index = e.currentTarget.dataset.id
@@ -221,7 +221,7 @@ function increaseAmount(e) {
     printProducts();
 };  
 
-/*Remove from cart*/
+/*Remove from cart button*/
 
 function resetAmount(e) {
     const index = e.currentTarget.dataset.id
@@ -244,8 +244,6 @@ let selectedPaymentOption = 'card'; //default
 
 radioInvoiceCard.forEach(radioBtn => {
     radioBtn.addEventListener('change', switchPayment);
-    radioBtn.addEventListener('change', activateButton);
-    
 });
 
 function switchPayment(e) {
@@ -412,7 +410,6 @@ function printCartProducts() {
 
 /*Gratis frakt*/
     if (footerAmount > 0 && footerAmount < 15) {
-        //console.log(footerSum);
         cartFooterShipFee.innerHTML = Math.round(footerSum * 1/10 + 25);
         footerSum = footerSum * 11/10 + 25;
     } else {
@@ -543,7 +540,7 @@ lName.addEventListener('input', activateButton);
 address.addEventListener('input', activateButton);
 postNumber.addEventListener('input', activateButton);
 city.addEventListener('input', activateButton);
-portCode.addEventListener('input', activateButton);
+portCode.addEventListener('input', checkPortCode); // not required
 phoneNumber.addEventListener('input', activateButton);
 eMail.addEventListener('input', activateButton);
 
@@ -580,9 +577,31 @@ function checkPostNumber() {
 function checkCity() {
     return nameRegEx.exec(city.value);    
 };
+
+
+/*Port code not required*/
 function checkPortCode() {
-    return portCodeRegEx.exec(portCode.value);    
+    portCodeRegEx.exec(portCode.value);    
+    console.log(portCodeRegEx.exec(portCode.value));
+    if (portCodeRegEx.exec(portCode.value) === null) {
+        warningPortCode.innerHTML = 'Felaktig portkod!'; 
+    }  else {
+        warningPortCode.innerHTML = '';  
+    }  
+    
 };
+
+/* if (checkPortCode() === null ) {
+    if (portCode.value !== '') {
+        warningPortCode.innerHTML = 'Felaktig portkod!';
+    }        
+} else {
+    warningPortCode.innerHTML = '';  
+}; */
+
+
+
+/****************************************************/
 
 function checkPhoneNumber() {
     return phoneNumberRegEx.exec(phoneNumber.value);    
@@ -653,14 +672,14 @@ function activateButton () {
         warningCity.innerHTML = '';  
     }
 
-    if (!checkPortCode() ) {
+    /*  if (!checkPortCode() ) {
         hasErrors = true;
         if (portCode.value !== '') {
             warningPortCode.innerHTML = 'Felaktig portkod!';
         }        
     } else {
         warningPortCode.innerHTML = '';  
-    }
+    }*/
 
     if (!checkPhoneNumber() ) {
         hasErrors = true;
