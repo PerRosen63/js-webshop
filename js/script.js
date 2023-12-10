@@ -192,9 +192,7 @@ function sortProduct() {
     printProducts();
 }; 
 
-/**
- * Background effect on plus minus delete
- */
+/*Background effect on plus, minus and delete*/
 
 function effect() {
     cartContainer.animate({backgroundColor:['#ff0000', '#000000']},{duration:800,fill:'forwards'});
@@ -231,10 +229,7 @@ function resetAmount(e) {
     printCartProducts();
 }; 
 
-
-/**
- *Toggles between invoice or card payment options
- */
+ /*Toggles between invoice or card payment options */ 
 
 const radioInvoiceCard = document.querySelectorAll('input[name="payoption"]'); //Payment option radio buttons
 const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
@@ -253,36 +248,42 @@ function switchPayment(e) {
     selectedPaymentOption = e.target.value;
 } 
 
+ /*Function called in product print and cart print - Invivible addition to price weekends 15% between friday 15.00 and 03.00 mondays*/
+
+ const today = new Date();
+ const hours = today.getHours();
+ const day = today.getDay();
+
+ function priceMultiplier() {
+ if ((day == 5 && hours >= 15) || (day == 6) || (day == 0) || (day == 1 && hours <= 3))  {
+         return 1.15; 
+     }
+     return 1;
+}
   
 /**
  * Product print
  */
 
 function printProducts() {
-    prodContainer.innerHTML = ''; //töm dokument
+    prodContainer.innerHTML = ''; //empty document
 
     for (let i = 0; i < products.length; i++) {
     const product = products[i];
 
     const amount = product.amount;
     let price = product.price;
-    
-    /*refaktorera kod se Munkshop3 - Specialregler YT 15min !!!*/
 
-    /*Osynligt helgpåslag 15% mellan fredag 15.00 och 02.59 måndagar*/
-    const today = new Date();
-    const hours = today.getHours();
-    const day = today.getDay();
+    /*Invivible addition to price weekends 15% between friday 15.00 and 03.00 mondays*/
 
-    if ((day == 5 && hours >= 15) || (day == 6) || (day == 0) || (day == 1 && hours <= 3))  {
-            price = Math.round(price * 11.5/10); 
-        } 
+    price = Math.round(price * priceMultiplier());
 
     /*Sum variable*/
 
     let sum = amount * price;
 
-    /*Mängdrabatt 10% vid 10 eller fler/vara*/
+    /*Quantity discount 10% if 10 or more/article*/
+
     if (amount > 9) {
         sum = sum * 0.9; //10% discount
     }
@@ -347,17 +348,16 @@ function printCartProducts() {
 
             let price = product.price;
 
-            /*Osynligt helgpåslag 15% mellan fredag 15.00 och 02.59 måndagar*/
-            const today = new Date();
-            const hours = today.getHours();
-            const day = today.getDay();
+            /*Invivible addition to price weekends 15% between friday 15.00 and 03.00 mondays*/
 
-            if ((day == 5 && hours >= 15) || (day == 6) || (day == 0) || (day == 1 && hours <= 3))  {
-                price = Math.round(price * 11.5/10); 
-            } 
+            price = Math.round(price * priceMultiplier());
 
-            /*Mängdrabatt 10% vid 10 eller fler/vara*/
+            /*Sum variable*/
+
             let sum = amount * price;
+
+            /*Quantity discount 10% if 10 or more/article*/
+
             if (amount > 9) {
                 sum = sum * 0.9; //10% discount    
             }
@@ -382,10 +382,14 @@ function printCartProducts() {
         
     });
 
+/**
+ * Cart "footer"
+ */
+
     const cartFooterAmount  = document.querySelector('#cartFooterAmount');
-    const cartIconCircle = document.querySelector('#cartIconCircle');
+    const cartIconCircle = document.querySelector('#cartIconCircle'); //header cart icon
     const cartFooterSum = document.querySelector('#cartFooterSum');
-    const cartIconSum = document.querySelector('#cartIconSum');
+    const cartIconSum = document.querySelector('#cartIconSum'); //header cart sum
     const cartFooterDiscount = document.querySelector('#cartFooterDiscount')
     const cartFooterShipFee = document.querySelector('#cartFooterShipFee');
     const cartFooterDiscountCode = document.querySelector('#cartFooterDiscountCode');
@@ -396,7 +400,8 @@ function printCartProducts() {
     cartFooterSum.innerHTML = Math.round(footerSum);
     cartIconSum.innerHTML = Math.round(footerSum);
 
-/*Rabatt 10% mellan 4.00 och 10.00 måndagar*/
+/*Discount 10% between 4.00 and 10.00 mondays*/
+
     const today = new Date();
     const hours = today.getHours();
     const day = today.getDay();
@@ -408,7 +413,8 @@ function printCartProducts() {
         cartFooterDiscount.innerHTML = 0;
     }
 
-/*Gratis frakt*/
+/*Free shipping*/
+
     if (footerAmount > 0 && footerAmount < 15) {
         cartFooterShipFee.innerHTML = Math.round(footerSum * 1/10 + 25);
         footerSum = footerSum * 11/10 + 25;
@@ -416,7 +422,8 @@ function printCartProducts() {
         cartFooterShipFee.innerHTML = 0;
     }
 
-/*Rabattkod*/
+/*Discount code*/
+
     const discountCode = document.querySelector('#discountcode'); 
             
         if (discountCode.value === 'rabatt') {
@@ -426,7 +433,8 @@ function printCartProducts() {
             cartFooterDiscountCode.innerHTML = 0;
         }
 
-/*Totalsumma*/
+/*Total sum*/
+
     cartFooterSumTot.innerHTML = Math.round(footerSum);
     
     const cartMinusButtons = document.querySelectorAll('.cartMinus');
@@ -445,7 +453,7 @@ function printCartProducts() {
         btn.addEventListener('click', resetAmount);
     });
 
-    /*Inaktivera Faktura över 800:-*/
+/*Inactivate invoice over 800:-*/
 
     const invoiceOption = document.querySelector('#persNumberOption'); //Payment option invoice div
     const personalId = document.querySelector('#persNumberInput'); //personal number
@@ -459,9 +467,9 @@ function printCartProducts() {
         personalId.disabled = false;
     } 
 
-    /**
-     * Order button and confirmation of order
-     */
+/**
+ * Order button and confirmation of order
+ */
 
     const confSection = document.querySelector('#confSection');
     sendBtn.addEventListener('click', sendOrder);
@@ -481,9 +489,8 @@ function printCartProducts() {
 
 }
 
-/**
- * Lägg till rabatt
- */
+ /*Add discount*/
+ 
     const discountBtn = document.querySelector('#discountBtn');
 
     discountBtn.addEventListener('click', discountInput);
@@ -494,30 +501,30 @@ function printCartProducts() {
 
 printProducts();
 
+
 /**
  * Form
  */
 
 /* Variables */
+
 const fName = document.querySelector('#fname');
 const lName = document.querySelector('#lname');
 const address = document.querySelector('#address');
 const postNumber = document.querySelector('#postnumber');
 const city = document.querySelector('#postort');
-const portCode = document.querySelector('#portkod');
 const phoneNumber = document.querySelector('#tel');
 const eMail = document.querySelector('#email');
-
 const personalId = document.querySelector('#persNumberInput'); //personal number
-
 const cardNumber = document.querySelector('#cardNumberInput'); //card number
-const cardMonthYear = document.querySelector('#monthyear'); //month/year
 const cardCvc = document.querySelector('#cvc'); //cvc
-
 const checkOne = document.querySelector('#checkone');
-const checkTwo = document.querySelector('#checktwo');
 
-// Warnings
+//const cardMonthYear = document.querySelector('#monthyear'); //month/year
+//const checkTwo = document.querySelector('#checktwo'); //onödig?
+
+/*Warnings*/
+
 const warningfName = document.querySelector('#fNameWarning');
 const warninglName = document.querySelector('#lNameWarning');
 const warningAddress = document.querySelector('#addressWarning');
@@ -533,24 +540,23 @@ const warningCardMonthYear = document.querySelector('#monthyear span');//Card
 const warningCardCvc = document.querySelector('#cvc+span');//Card
 
 
-/* Event listeners to activate order button */
+/* Event listeners on form fields to activate order button */
 
 fName.addEventListener('input', activateButton);
 lName.addEventListener('input', activateButton);
 address.addEventListener('input', activateButton);
 postNumber.addEventListener('input', activateButton);
 city.addEventListener('input', activateButton);
-portCode.addEventListener('input', checkPortCode); // not required
 phoneNumber.addEventListener('input', activateButton);
 eMail.addEventListener('input', activateButton);
 
 personalId.addEventListener('input', activateButton);//Invoice persnr
-cardNumber.addEventListener('input', activateButton);//Card nr
-//cardMonthYear.addEventListener('input', activateButton);//Card MonthYear
+cardNumber.addEventListener('input', activateButton);//Card nr (MonthYear not checked)
 cardCvc.addEventListener('input', activateButton);//Card cvc
 checkOne.addEventListener('click', activateButton ); //agree box
 
 /* Regex check */
+
 const nameRegEx = new RegExp(/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/); //check Förnamn Efternamn Postort
 const addressRegEx = new RegExp(/[A-Za-z\u0080-\uFFFF -]{2,}/); //check address
 const postNumberRegEx = new RegExp(/^\d{3} \d{2}$/); //check postnumber
@@ -577,32 +583,6 @@ function checkPostNumber() {
 function checkCity() {
     return nameRegEx.exec(city.value);    
 };
-
-
-/*Port code not required*/
-function checkPortCode() {
-    portCodeRegEx.exec(portCode.value);    
-    console.log(portCodeRegEx.exec(portCode.value));
-    if (portCodeRegEx.exec(portCode.value) === null) {
-        warningPortCode.innerHTML = 'Felaktig portkod!'; 
-    }  else {
-        warningPortCode.innerHTML = '';  
-    }  
-    
-};
-
-/* if (checkPortCode() === null ) {
-    if (portCode.value !== '') {
-        warningPortCode.innerHTML = 'Felaktig portkod!';
-    }        
-} else {
-    warningPortCode.innerHTML = '';  
-}; */
-
-
-
-/****************************************************/
-
 function checkPhoneNumber() {
     return phoneNumberRegEx.exec(phoneNumber.value);    
 };
@@ -615,6 +595,21 @@ function checkPersonalId() {
 };
 function checkCardNumber() {
     return cardNumberRegEx.exec(cardNumber.value);
+};
+
+/*Port code check but not required, not activating order button*/
+
+const portCode = document.querySelector('#portkod');
+portCode.addEventListener('input', checkPortCode);
+
+function checkPortCode() {
+    warningPortCode.innerHTML = '';  
+    portCodeRegEx.exec(portCode.value);    
+    console.log(portCodeRegEx.exec(portCode.value));
+   
+    if (portCodeRegEx.exec(portCode.value) === null && portCode.value !== '') {
+        warningPortCode.innerHTML = 'Felaktig portkod!';   
+    }  
 };
 
 /**
@@ -671,15 +666,6 @@ function activateButton () {
     } else {
         warningCity.innerHTML = '';  
     }
-
-    /*  if (!checkPortCode() ) {
-        hasErrors = true;
-        if (portCode.value !== '') {
-            warningPortCode.innerHTML = 'Felaktig portkod!';
-        }        
-    } else {
-        warningPortCode.innerHTML = '';  
-    }*/
 
     if (!checkPhoneNumber() ) {
         hasErrors = true;
