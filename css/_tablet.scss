@@ -49,9 +49,9 @@ Cart section
         justify-self: center;
     }
 
-    h6,
-    h6:nth-child(3),
-    h6:nth-child(4) {
+    p,
+    p:nth-child(3),
+    p:nth-child(4) {
         grid-column: span 2;
         justify-self: end;
     }
