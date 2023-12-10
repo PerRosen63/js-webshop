@@ -40,6 +40,7 @@ Cart section
     h4,
     h6:nth-child(1) {
         grid-column: span 5;
+        justify-self: start;
     }
 
     .cartAmountContainer,
