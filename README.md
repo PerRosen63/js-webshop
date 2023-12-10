@@ -11,7 +11,14 @@ Jag har under flera år jobbat med att bygga webbplatser t ex webbshoppar, främ
 
 Den fiktiva webbshoppen säljer s.k. merch för ett i högsta grad existerande rockband.
 
+## Teknik
+- HTML
+- CSS/SCSS
+- javaScript
 
+## Länk till webbsida
+
+https://medieinstitutet.github.io/fed23d-js-grundkurs-webshop-PerRosen63/
 
 ## Screenshot desktop
 
@@ -20,4 +27,12 @@ Den fiktiva webbshoppen säljer s.k. merch för ett i högsta grad existerande r
 ## Screenshot mobile
 
 ![](screenshots/fed23d-js-grundkurs-webshop-PerRosen63_iPhoneSE.jpg)
+
+## Validering
+
+![](validation/html_validate.JPG)
+
+![](validation/css_validate.JPG)
+
+
 
