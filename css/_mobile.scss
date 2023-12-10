@@ -454,13 +454,19 @@ Confirmation box
 */
 
 .confSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: red;
-    padding: 20px 10px 50px;
-    margin: 30px 0;
-
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    .confContainer {
+        display: flex;
+        flex-direction: column;
+        max-width: 1160px;
+        align-items: center;
+        background: red;
+        padding: 20px 10px 50px;
+        margin: 30px auto;
+    }
     button {
         align-self: flex-end;
         background-color: $red;
